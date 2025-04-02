@@ -327,4 +327,4 @@
     </div>
   </header>
 </template>
-<style src="./src/assets/style.css"></style>
+<style src="./src/assets/header.css"></style>

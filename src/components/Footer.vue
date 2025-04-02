@@ -93,4 +93,4 @@
     </div>
   </footer>
 </template>
-<style src="./src/assets/style.css"></style>
+<style src="./src/assets/footer.css"></style>
