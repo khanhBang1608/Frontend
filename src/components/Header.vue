@@ -6,7 +6,7 @@
       <div class="container d-flex justify-content-between align-items-center py-2">
         <!-- Logo -->
         <a href="#">
-          <img src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
+          <img th:src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
         </a>
 
         <!-- Menu điều hướng -->
