@@ -6,7 +6,7 @@
       <div class="container d-flex justify-content-between align-items-center py-2">
         <!-- Logo -->
         <a href="#">
-          <img th:src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
+          <img src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
         </a>
 
         <!-- Menu điều hướng -->
@@ -49,18 +49,13 @@
             </li>
             <!-- Menu Dropdown -->
             <li class="nav-item dropdown position-static">
-              <a class="nav-link no-arrow" href="/product" id="navbarDropdown"
-                >Danh Mục</a
-              >
+              <a class="nav-link no-arrow" href="/product" id="navbarDropdown">Danh Mục</a>
             </li>
 
             <!-- Mục Nam -->
             <li class="nav-item dropdown position-static">
               <a class="nav-link no-arrow" href="#" id="navbarDropdownMen">Nam</a>
-              <div
-                class="dropdown-menu custom-dropdown w-100"
-                aria-labelledby="navbarDropdownMen"
-              >
+              <div class="dropdown-menu custom-dropdown w-100" aria-labelledby="navbarDropdownMen">
                 <div class="container">
                   <div class="row">
                     <div class="col-md-2">
@@ -174,10 +169,7 @@
             </li>
             <li class="nav-item dropdown position-static">
               <a class="nav-link no-arrow" href="#" id="navbarDropdownKids">Trẻ Em</a>
-              <div
-                class="dropdown-menu custom-dropdown w-100"
-                aria-labelledby="navbarDropdownKids"
-              >
+              <div class="dropdown-menu custom-dropdown w-100" aria-labelledby="navbarDropdownKids">
                 <div class="container">
                   <div class="row">
                     <!-- Cột 1: Nổi Bật -->
@@ -214,9 +206,7 @@
                       <h6 class="dropdown-header">Trẻ Em Theo Độ Tuổi</h6>
                       <a class="dropdown-item" href="#">Trẻ Lớn (7 - 14 tuổi)</a>
                       <a class="dropdown-item" href="#">Trẻ Nhỏ (4 - 7 tuổi)</a>
-                      <a class="dropdown-item" href="#"
-                        >Trẻ Sơ Sinh & Tập Đi (0 - 4 tuổi)</a
-                      >
+                      <a class="dropdown-item" href="#">Trẻ Sơ Sinh & Tập Đi (0 - 4 tuổi)</a>
                     </div>
                     <!-- Cột 5: Mua Sắm Theo Môn Thể Thao -->
                     <div class="col-md-2">
@@ -240,10 +230,7 @@
             </li>
             <li class="nav-item dropdown position-static">
               <a class="nav-link no-arrow" href="#" id="navbarDropdownSale">Khuyến Mãi</a>
-              <div
-                class="dropdown-menu custom-dropdown w-100"
-                aria-labelledby="navbarDropdownSale"
-              >
+              <div class="dropdown-menu custom-dropdown w-100" aria-labelledby="navbarDropdownSale">
                 <div class="container">
                   <div class="row">
                     <!-- Cột 1: Giảm Giá & Ưu Đãi -->
@@ -309,10 +296,7 @@
               >
                 <i class="fa-solid fa-gear fs-5"></i>
               </a>
-              <ul
-                class="dropdown-menu dropdown-menu-start"
-                aria-labelledby="userDropdown"
-              >
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
                 <li>
                   <a class="dropdown-item" href="/user/profile">Cập nhật thông tin</a>
                 </li>
@@ -343,119 +327,4 @@
     </div>
   </header>
 </template>
-<style>
-/* Hiển thị dropdown khi hover vào nav-item */
-.nav-item.dropdown:hover .custom-dropdown {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-/* Đảm bảo dropdown không bị ẩn khi rê chuột vào dropdown */
-.custom-dropdown {
-  position: absolute;
-  left: 0;
-  width: 100vw;
-  top: 100%;
-  background: white;
-  padding: 20px;
-  opacity: 0;
-  display: none;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  z-index: 1000;
-  border: none;
-}
-
-/* Khi hover vào dropdown thì không bị ẩn */
-.nav-item.dropdown:hover .custom-dropdown,
-.custom-dropdown:hover {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.custom-dropdown .dropdown-header {
-  font-weight: bold;
-  color: black;
-}
-
-.custom-dropdown .dropdown-item {
-  color: #555;
-  font-size: 14px;
-}
-
-.custom-dropdown .dropdown-item:hover {
-  color: black;
-  background: #f8f9fa;
-}
-
-/* Bỏ mũi tên trên dropdown */
-.navbar .nav-item .nav-link.no-arrow::after {
-  display: none !important;
-}
-
-/* Gạch chân khi hover */
-.navbar .nav-item .nav-link:hover {
-  text-decoration: underline;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  border: 1px solid #e0e0e0;
-  /* Nhẹ hơn cho cảm giác hiện đại */
-  border-radius: 30px;
-  /* Tạo góc bo tròn mềm mại */
-  padding: 6px 12px;
-  /* Tạo khoảng cách gọn gàng */
-  width: 200px;
-  /* Kích thước phù hợp */
-  background-color: #f9f9f9;
-  /* Màu nền nhẹ nhàng */
-}
-
-.search-box i {
-  color: #888;
-  /* Màu biểu tượng trung tính */
-  font-size: 1.2rem;
-  /* Biểu tượng kính lúp rõ hơn */
-  margin-right: 8px;
-}
-
-.search-box input {
-  border: none;
-  outline: none;
-  flex-grow: 1;
-  /* Cho phép ô nhập liệu co giãn */
-  font-size: 0.9rem;
-  /* Font nhỏ, tinh tế */
-  background-color: transparent;
-  /* Đồng nhất màu nền */
-}
-
-.search-box input::placeholder {
-  color: #aaa;
-  /* Màu placeholder nhẹ hơn */
-}
-
-.search-box:hover {
-  border-color: #c5c5c5;
-  /* Tạo hiệu ứng khi hover */
-}
-
-.search-box i,
-.navbar a i {
-  color: #555;
-  /* Màu xám đậm, phù hợp với header */
-  transition: color 0.3s ease;
-  /* Hiệu ứng mượt */
-}
-
-.search-box:hover i,
-.navbar a:hover i {
-  color: #333;
-  /* Màu đen nhạt khi hover */
-}
-</style>
+<style src="./src/assets/style.css"></style>

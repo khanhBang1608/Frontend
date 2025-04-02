@@ -1,0 +1,259 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  background-color: #12131c;
+}
+
+i {
+  font-size: clamp(1.6rem, 2vw, 2.4rem);
+}
+
+.footer {
+  padding-block: 5rem;
+  background-color: #151823;
+  color: #666873;
+}
+
+.footer-container {
+  max-width: 116rem;
+  margin: auto;
+  padding: 0 1.5rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  row-gap: 2rem;
+}
+
+.footer_title {
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-list-item {
+  margin-bottom: 0.5rem;
+  list-style: none;
+}
+
+.footer_list {
+  gap: 0.8rem;
+}
+
+.footer-list-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.25s;
+}
+
+.footer-list-link:hover {
+  color: #fff;
+}
+
+.footer-list-link:hover .bi-facebook {
+  color: #1877f2;
+}
+
+.footer-list-link:hover .bi-twitter {
+  color: #1da1f2;
+}
+
+.footer-list-link:hover .bi-instagram {
+  color: #e4405f;
+}
+
+.footer-list-link:hover .bi-linkedin {
+  color: #0077b5;
+}
+
+.footer-list-link:hover .bi-youtube {
+  color: #ff0000;
+}
+
+.footer-list-link:hover .bi-twitter {
+  color: #0d8bf0;
+}
+
+.footer-list-link:hover .bi-instagram {
+  color: #c13584;
+}
+
+.footer-list-link:hover .bi-linkedin {
+  color: #005582;
+}
+
+.footer-list-link:hover .bi-youtube {
+  color: #cc0000;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.company-info {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 5rem;
+}
+
+.company-logo {
+  color: #fff;
+  font-size: 3rem;
+}
+
+.company-info ul {
+  flex-direction: row;
+}
+
+.copyright {
+  margin-top: auto;
+}
+
+@media screen and (min-width: 40rem) {
+  .company-info {
+    grid-column: span 2;
+  }
+}
+
+/* header
+
+/* Hiển thị dropdown khi hover vào nav-item */
+.nav-item.dropdown:hover .custom-dropdown {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+/* Đảm bảo dropdown không bị ẩn khi rê chuột vào dropdown */
+.custom-dropdown {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  top: 100%;
+  background: white;
+  padding: 20px;
+  opacity: 0;
+  display: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  z-index: 1000;
+  border: none;
+}
+
+/* Khi hover vào dropdown thì không bị ẩn */
+.nav-item.dropdown:hover .custom-dropdown,
+.custom-dropdown:hover {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.custom-dropdown .dropdown-header {
+  font-weight: bold;
+  color: black;
+}
+
+.custom-dropdown .dropdown-item {
+  color: #555;
+  font-size: 14px;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  color: black;
+  background: #f8f9fa;
+}
+
+/* Bỏ mũi tên trên dropdown */
+.navbar .nav-item .nav-link.no-arrow::after {
+  display: none !important;
+}
+
+/* Gạch chân khi hover */
+.navbar .nav-item .nav-link:hover {
+  text-decoration: underline;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  /* Nhẹ hơn cho cảm giác hiện đại */
+  border-radius: 30px;
+  /* Tạo góc bo tròn mềm mại */
+  padding: 6px 12px;
+  /* Tạo khoảng cách gọn gàng */
+  width: 200px;
+  /* Kích thước phù hợp */
+  background-color: #f9f9f9;
+  /* Màu nền nhẹ nhàng */
+}
+
+.search-box i {
+  color: #888;
+  /* Màu biểu tượng trung tính */
+  font-size: 1.2rem;
+  /* Biểu tượng kính lúp rõ hơn */
+  margin-right: 8px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  /* Cho phép ô nhập liệu co giãn */
+  font-size: 0.9rem;
+  /* Font nhỏ, tinh tế */
+  background-color: transparent;
+  /* Đồng nhất màu nền */
+}
+
+.search-box input::placeholder {
+  color: #aaa;
+  /* Màu placeholder nhẹ hơn */
+}
+
+.search-box:hover {
+  border-color: #c5c5c5;
+  /* Tạo hiệu ứng khi hover */
+}
+
+.search-box i,
+.navbar a i {
+  color: #555;
+  /* Màu xám đậm, phù hợp với header */
+  transition: color 0.3s ease;
+  /* Hiệu ứng mượt */
+}
+
+.search-box:hover i,
+.navbar a:hover i {
+  color: #333;
+  /* Màu đen nhạt khi hover */
+}
