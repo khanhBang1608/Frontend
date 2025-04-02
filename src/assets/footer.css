@@ -1,24 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-family: sans-serif;
-  font-size: 1.6rem;
-  background-color: #12131c;
-}
-
-i {
-  font-size: clamp(1.6rem, 2vw, 2.4rem);
-}
-
+/* Footer Styles */
 .footer {
+  font-size: 1.8rem; /* Đồng bộ với header */
   padding-block: 5rem;
   background-color: #151823;
   color: #666873;
@@ -37,7 +19,7 @@ i {
 }
 
 .footer_title {
-  font-size: 1.8rem;
+  font-size: 2rem; /* Điều chỉnh lớn hơn một chút */
   color: #fff;
   font-weight: 500;
   margin-bottom: 2rem;
@@ -54,13 +36,10 @@ i {
   list-style: none;
 }
 
-.footer_list {
-  gap: 0.8rem;
-}
-
 .footer-list-link {
   text-decoration: none;
   color: inherit;
+  font-size: 1.8rem; /* Tương đương header */
   transition: color 0.25s;
 }
 
@@ -68,48 +47,14 @@ i {
   color: #fff;
 }
 
-.footer-list-link:hover .bi-facebook {
-  color: #1877f2;
-}
+/* Social Media Icons */
+.footer-list-link:hover .bi-facebook { color: #1877f2; }
+.footer-list-link:hover .bi-twitter { color: #1da1f2; }
+.footer-list-link:hover .bi-instagram { color: #e4405f; }
+.footer-list-link:hover .bi-linkedin { color: #0077b5; }
+.footer-list-link:hover .bi-youtube { color: #ff0000; }
 
-.footer-list-link:hover .bi-twitter {
-  color: #1da1f2;
-}
-
-.footer-list-link:hover .bi-instagram {
-  color: #e4405f;
-}
-
-.footer-list-link:hover .bi-linkedin {
-  color: #0077b5;
-}
-
-.footer-list-link:hover .bi-youtube {
-  color: #ff0000;
-}
-
-.footer-list-link:hover .bi-twitter {
-  color: #0d8bf0;
-}
-
-.footer-list-link:hover .bi-instagram {
-  color: #c13584;
-}
-
-.footer-list-link:hover .bi-linkedin {
-  color: #005582;
-}
-
-.footer-list-link:hover .bi-youtube {
-  color: #cc0000;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
+/* Company Info */
 .company-info {
   grid-column: 1/-1;
   display: flex;
@@ -129,8 +74,13 @@ ul {
 
 .copyright {
   margin-top: auto;
+  font-size: 1.6rem; /* Đồng bộ font chữ */
+  color: #888;
+  text-align: center;
+  padding-top: 3rem;
 }
 
+/* Responsive */
 @media screen and (min-width: 40rem) {
   .company-info {
     grid-column: span 2;
