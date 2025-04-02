@@ -6,7 +6,7 @@
       <div class="container d-flex justify-content-between align-items-center py-2">
         <!-- Logo -->
         <a href="#">
-          <img th:src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
+          <img src="@/assets/images/Jordan.png" alt="Nike Logo" height="24" />
         </a>
 
         <!-- Menu điều hướng -->
@@ -29,7 +29,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img th:src="@{/images/Nike.png}" alt="Logo Nike" height="24" />
+          <img src="@/assets/images/Nike.png" alt="Logo Nike" height="24" />
         </a>
         <button
           class="navbar-toggler"

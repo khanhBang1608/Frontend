@@ -1,13 +1,16 @@
 import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+// Import Bootstrap JS (bao gồm cả bundle để có hỗ trợ các tính năng JS như Modal, Dropdown...)
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+
+// Import FontAwesome CSS
+import '@fortawesome/fontawesome-free/css/all.css'
 
 const app = createApp(App)
 
