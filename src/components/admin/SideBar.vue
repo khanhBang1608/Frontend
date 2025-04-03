@@ -1,5 +1,4 @@
 <script></script>
-
 <template>
     <header>
         <nav class="sidebar">
@@ -44,4 +43,4 @@
     </header>
 </template>
 
-<style></style>
+<style src="./src/assets/css/sidebar.css"></style>
