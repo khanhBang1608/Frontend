@@ -1,7 +1,7 @@
 <script></script>
 
 <template>
-  <footer class="footer">
+  <footer class="footer mt-5">
     <div class="container">
       <div class="row">
         <!-- Thông tin công ty -->

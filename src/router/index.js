@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
+import ChangePasswordView from '@/views/ChangePasswordView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import MyAddressView from '@/views/MyAddressView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +24,26 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView,
+    },
+    {
+      path: '/forgot-password',
+      name: 'forgot-password',
+      component: ForgotPasswordView,
+    },
+    {
+      path: '/user/change-password',
+      name: 'change-password',
+      component: ChangePasswordView,
+    },
+    {
+      path: '/user/profile',
+      name: 'profile',
+      component: ProfileView,
+    },
+    {
+      path: '/user/address',
+      name: 'address',
+      component: MyAddressView,
     },
     {
       path: '/about',

@@ -4,30 +4,17 @@
   <div class="container mt-5">
     <h2 class="text-center">Đổi Mật Khẩu</h2>
 
-    <!-- Hiển thị thông báo thành công hoặc lỗi -->
-    <div th:if="${successMessage}" class="alert alert-success">
-      <span th:text="${successMessage}"></span>
-    </div>
-    <div th:if="${errorMessage}" class="alert alert-danger">
-      <span th:text="${errorMessage}"></span>
-    </div>
-
-    <form th:action="@{/user/change-password}" method="post" th:object="${changePasswordBean}">
+    <form action="/user/change-password" method="post" id="changePasswordForm">
       <!-- Mật khẩu hiện tại -->
       <div class="mb-3">
-        <label for="current	Password" class="form-label">Mật khẩu hiện tại:</label>
+        <label for="currentPassword" class="form-label">Mật khẩu hiện tại:</label>
         <input
           type="password"
           class="form-control"
           id="currentPassword"
           name="currentPassword"
-          th:field="*{currentPassword}"
         />
-        <div
-          class="text-danger"
-          th:if="${#fields.hasErrors('currentPassword')}"
-          th:errors="*{currentPassword}"
-        ></div>
+        <div class="text-danger" id="currentPasswordError"></div>
       </div>
 
       <!-- Mật khẩu mới -->
@@ -38,13 +25,8 @@
           class="form-control"
           id="newPassword"
           name="newPassword"
-          th:field="*{newPassword}"
         />
-        <div
-          class="text-danger"
-          th:if="${#fields.hasErrors('newPassword')}"
-          th:errors="*{newPassword}"
-        ></div>
+        <div class="text-danger" id="newPasswordError"></div>
       </div>
 
       <!-- Xác nhận mật khẩu mới -->
@@ -55,14 +37,10 @@
           class="form-control"
           id="confirmPassword"
           name="confirmPassword"
-          th:field="*{confirmPassword}"
         />
-        <div
-          class="text-danger"
-          th:if="${#fields.hasErrors('confirmPassword')}"
-          th:errors="*{confirmPassword}"
-        ></div>
+        <div class="text-danger" id="confirmPasswordError"></div>
       </div>
+
       <button type="submit" class="btn btn-danger w-100">Đổi Mật Khẩu</button>
     </form>
   </div>
