@@ -6,21 +6,15 @@
       <div class="container d-flex justify-content-between align-items-center py-2">
         <!-- Logo -->
         <a href="#">
-          <img th:src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
+          <img src="@/assets/images/Jordan.png" alt="Nike Logo" height="24" />
         </a>
 
         <!-- Menu điều hướng -->
         <div class="d-flex align-items-center">
           <a href="/contact" class="text-dark text-decoration-none me-3">Tìm cửa hàng</a>
           <a href="/about" class="text-dark text-decoration-none me-3">Giới thiệu</a>
-          <!-- Nếu có cookie, hiển thị "Đăng xuất" -->
-          <th:block th:if="${hasCookies}">
             <a href="/logout" class="text-dark text-decoration-none me-3">Đăng xuất</a>
-          </th:block>
-
-          <th:block th:if="${!hasCookies}">
             <a href="/login" class="text-dark text-decoration-none me-3">Đăng nhập</a>
-          </th:block>
         </div>
       </div>
     </div>
@@ -29,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img th:src="@{/images/Nike.png}" alt="Logo Nike" height="24" />
+          <img src="@/assets/images/Nike.png" alt="Nike Logo" height="24" />
         </a>
         <button
           class="navbar-toggler"
@@ -338,4 +332,4 @@
     </div>
   </header>
 </template>
-<style src="./src/assets/header.css"></style>
+<style src="./src/assets/css/header.css"></style>

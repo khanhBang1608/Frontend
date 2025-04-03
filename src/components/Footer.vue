@@ -67,4 +67,4 @@
   </footer>
 </template>
 
-<style src="./src/assets/footer.css"></style>
+<style src="./src/assets/css/footer.css"></style>

@@ -1,0 +1,140 @@
+.trending-section {
+  background-color: white;
+  padding: 40px 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.shop-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shop-btn {
+  background: none;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+}
+
+.shop-btn:hover {
+  text-decoration: underline;
+}
+
+/* Nút chuyển trang */
+.nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e5e5e5;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn i {
+  font-size: 18px;
+}
+
+.nav-btn-left {
+  color: #a0a0a0;
+}
+
+.nav-btn-right {
+  color: #000;
+}
+
+.nav-btn:hover {
+  background-color: #d1d1d1;
+}
+
+.nav-btn:hover i {
+  color: black !important;
+}
+
+.nav-btn.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Slide sản phẩm */
+.products-container {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.product-card {
+  width: 300px;
+  flex: 0 0 auto;
+  margin-right: 20px;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-card .card-body {
+  padding-left: 0;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.sport-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: white;
+  border: none;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.product-card {
+  width: 300px;
+  flex: 0 0 auto;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-card h5 {
+  margin-top: 10px;
+}
+
+.price-product {
+  font-weight: bold;
+}
+
+.favorite-icon {
+  font-size: 1.5rem;
+  color: gray;
+  cursor: pointer;
+  position: absolute;
+  /* top: 10px; */
+  right: 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.favorite-icon.active {
+  color: red;
+}
+
+.product-card {
+  position: relative;
+}
