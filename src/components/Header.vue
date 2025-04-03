@@ -6,7 +6,7 @@
       <div class="container d-flex justify-content-between align-items-center py-2">
         <!-- Logo -->
         <a href="#">
-          <img src="@/assets/images/Jordan.png" alt="Nike Logo" height="24" />
+          <img th:src="@{/images/Jordan.png}" alt="Nike Logo" height="24" />
         </a>
 
         <!-- Menu điều hướng -->
@@ -29,7 +29,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="@/assets/images/Nike.png" alt="Logo Nike" height="24" />
+          <img th:src="@{/images/Nike.png}" alt="Logo Nike" height="24" />
         </a>
         <button
           class="navbar-toggler"
@@ -169,7 +169,10 @@
             </li>
             <li class="nav-item dropdown position-static">
               <a class="nav-link no-arrow" href="#" id="navbarDropdownKids">Trẻ Em</a>
-              <div class="dropdown-menu custom-dropdown w-100" aria-labelledby="navbarDropdownKids">
+              <div
+                class="dropdown-menu custom-dropdown w-100"
+                aria-labelledby="navbarDropdownKids"
+              >
                 <div class="container">
                   <div class="row">
                     <!-- Cột 1: Nổi Bật -->
@@ -206,7 +209,9 @@
                       <h6 class="dropdown-header">Trẻ Em Theo Độ Tuổi</h6>
                       <a class="dropdown-item" href="#">Trẻ Lớn (7 - 14 tuổi)</a>
                       <a class="dropdown-item" href="#">Trẻ Nhỏ (4 - 7 tuổi)</a>
-                      <a class="dropdown-item" href="#">Trẻ Sơ Sinh & Tập Đi (0 - 4 tuổi)</a>
+                      <a class="dropdown-item" href="#"
+                        >Trẻ Sơ Sinh & Tập Đi (0 - 4 tuổi)</a
+                      >
                     </div>
                     <!-- Cột 5: Mua Sắm Theo Môn Thể Thao -->
                     <div class="col-md-2">
@@ -230,7 +235,10 @@
             </li>
             <li class="nav-item dropdown position-static">
               <a class="nav-link no-arrow" href="#" id="navbarDropdownSale">Khuyến Mãi</a>
-              <div class="dropdown-menu custom-dropdown w-100" aria-labelledby="navbarDropdownSale">
+              <div
+                class="dropdown-menu custom-dropdown w-100"
+                aria-labelledby="navbarDropdownSale"
+              >
                 <div class="container">
                   <div class="row">
                     <!-- Cột 1: Giảm Giá & Ưu Đãi -->
@@ -296,7 +304,10 @@
               >
                 <i class="fa-solid fa-gear fs-5"></i>
               </a>
-              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
+              <ul
+                class="dropdown-menu dropdown-menu-start"
+                aria-labelledby="userDropdown"
+              >
                 <li>
                   <a class="dropdown-item" href="/user/profile">Cập nhật thông tin</a>
                 </li>

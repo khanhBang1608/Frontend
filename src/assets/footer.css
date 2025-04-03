@@ -1,86 +1,88 @@
-/* Footer Styles */
 .footer {
-  font-size: 1.8rem; /* Đồng bộ với header */
   padding-block: 5rem;
   background-color: #151823;
   color: #666873;
 }
 
-.footer-container {
-  max-width: 116rem;
-  margin: auto;
-  padding: 0 1.5rem;
-}
-
-.footer-top {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  row-gap: 2rem;
-}
-
 .footer_title {
-  font-size: 2rem; /* Điều chỉnh lớn hơn một chút */
   color: #fff;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .footer-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .footer-list-item {
-  margin-bottom: 0.5rem;
   list-style: none;
 }
 
 .footer-list-link {
   text-decoration: none;
   color: inherit;
-  font-size: 1.8rem; /* Tương đương header */
   transition: color 0.25s;
+}
+
+.footer-list {
+  display: flex; 
+  flex-direction: row; /* Đặt icon nằm ngang */
+  gap: 1rem; /* Khoảng cách giữa các icon */
 }
 
 .footer-list-link:hover {
   color: #fff;
 }
 
-/* Social Media Icons */
-.footer-list-link:hover .bi-facebook { color: #1877f2; }
-.footer-list-link:hover .bi-twitter { color: #1da1f2; }
-.footer-list-link:hover .bi-instagram { color: #e4405f; }
-.footer-list-link:hover .bi-linkedin { color: #0077b5; }
-.footer-list-link:hover .bi-youtube { color: #ff0000; }
+/* Icon trong footer */
+.footer i {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
 
-/* Company Info */
-.company-info {
-  grid-column: 1/-1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-right: 5rem;
+.footer-list-link:hover .bi-facebook {
+  color: #1877F2;
+}
+
+.footer-list-link:hover .bi-twitter {
+  color: #0d8bf0;
+}
+
+.footer-list-link:hover .bi-instagram {
+  color: #c13584;
+}
+
+.footer-list-link:hover .bi-linkedin {
+  color: #005582;
+}
+
+.footer-list-link:hover .bi-youtube {
+  color: #cc0000;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .company-logo {
   color: #fff;
-  font-size: 3rem;
-}
-
-.company-info ul {
-  flex-direction: row;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .copyright {
-  margin-top: auto;
-  font-size: 1.6rem; /* Đồng bộ font chữ */
-  color: #888;
-  text-align: center;
-  padding-top: 3rem;
+  margin-top: 1rem;
+  display: block;
 }
 
-/* Responsive */
+ul, ol {
+  padding-left: 0 !important;
+}
+
 @media screen and (min-width: 40rem) {
   .company-info {
     grid-column: span 2;

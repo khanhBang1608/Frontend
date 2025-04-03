@@ -1,4 +1,3 @@
-
 /* Hiển thị dropdown khi hover vào nav-item */
 .nav-item.dropdown:hover .custom-dropdown {
   display: block;

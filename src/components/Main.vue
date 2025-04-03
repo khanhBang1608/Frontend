@@ -120,10 +120,6 @@ function toggleFavorite(icon) {
 </script>
 <template>
   <div class="container my-1">
-    <!-- Slide chạy ảnh -->
-    <div class="mb-3">
-      <img th:src="@{/images/Background.jpg}" class="d-block w-100" alt="Slide 1" />
-    </div>
     <div class="trending-section mt-4">
       <div class="container">
         <!-- Tiêu đề và nút Shop với nút điều hướng -->
@@ -140,53 +136,28 @@ function toggleFavorite(icon) {
           </div>
         </div>
         <div class="products-container" id="productsContainer">
-          <div
-            class="col-md-3 col-sm-6 mb-4"
-            th:each="product : ${products}"
-            th:if="${product.status}"
-          >
+          <div class="col-md-3 col-sm-6 mb-4">
             <div class="product-card text-center">
               <i
-                class="favorite-icon"
-                th:data-product-id="${product.id}"
-                th:classappend="${#lists.contains(favoriteProductIds, product.id)} 
-					                   ? 'bi bi-heart-fill text-danger' 
-					                   : 'bi bi-heart'"
+                class="favorite-icon bi bi-heart"
+                data-product-id="${product.id}"
                 onclick="toggleFavorite(this)"
               >
               </i>
               <img
-                th:if="${not #lists.isEmpty(product.images)}"
-                th:src="@{'/images/' + ${product.images[0].name}}"
-                th:alt="${product.name}"
+                src="/images/${product.images[0].name}"
+                alt="${product.name}"
                 class="img-fluid"
               />
-              <h5 th:text="${product.name}"></h5>
-              <p
-                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"
-                th:class="text-danger"
-              ></p>
-              <a
-                th:href="@{'/product/detail?productId=' + ${product.id}}"
-                class="btn btn-primary"
-                >Chi Tiết</a
-              >
+              <h5>${product.name}</h5>
+              <p class="text-danger">${product.price} VND</p>
+              <a href="/product/detail?productId=${product.id}" class="btn btn-primary">
+                Chi Tiết
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="container mt-4">
-				<h2 class="fw-bold">Trending Now: Espresso</h2>
-				<div class="products-container">
-					<div class="product-card">
-						<a href="link-to-product-1.html"> <img
-							src="image/Brazil 1998 Reissue.png" alt="Gazelle">
-						</a>
-						<h5>Gazelle</h5>
-						<p>A true classic with a long legacy.</p>
-					</div>
-				</div>
-			</div> -->
       <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
           <h2 class="fw-bold">Shop By Sport</h2>
@@ -203,35 +174,31 @@ function toggleFavorite(icon) {
           <!-- Danh sách các môn thể thao -->
           <div class="products-container" id="sportsContainer">
             <div class="product-card">
-              <img th:src="@{/images/Running.jpg}" class="card-img-top" alt="Running" />
+              <img src="/images/Running.jpg" class="card-img-top" alt="Running" />
               <button class="sport-btn">Running</button>
             </div>
             <div class="product-card">
-              <img th:src="@{/images/Football.jpg}" class="card-img-top" alt="Football" />
+              <img src="/images/Football.jpg" class="card-img-top" alt="Football" />
               <button class="sport-btn">Football</button>
             </div>
             <div class="product-card">
-              <img
-                th:src="@{/images/Basketball.jpg}"
-                class="card-img-top"
-                alt="Basketball"
-              />
+              <img src="/images/Basketball.jpg" class="card-img-top" alt="Basketball" />
               <button class="sport-btn">Basketball</button>
             </div>
             <div class="product-card">
               <img
-                th:src="@{/images/Training & Gym.jpg}"
+                src="/images/Training & Gym.jpg"
                 class="card-img-top"
                 alt="Basketball"
               />
               <button class="sport-btn">Training & Gym</button>
             </div>
             <div class="product-card">
-              <img th:src="@{/images/Tennis.jpg}" class="card-img-top" alt="Basketball" />
+              <img src="/images/Tennis.jpg" class="card-img-top" alt="Basketball" />
               <button class="sport-btn">Tennis</button>
             </div>
             <div class="product-card">
-              <img th:src="@{/images/Yoga.jpg}" class="card-img-top" alt="Basketball" />
+              <img src="/images/Yoga.jpg" class="card-img-top" alt="Basketball" />
               <button class="sport-btn">Yoga</button>
             </div>
           </div>
