@@ -6,6 +6,7 @@ import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import MyAddressView from '@/views/MyAddressView.vue'
+import ManageCategoryView from '@/views/ManageCategoryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/user/address',
       name: 'address',
       component: MyAddressView,
+    },
+    {
+      path: '/admin/category',
+      name: 'category',
+      component: ManageCategoryView,
     },
     {
       path: '/about',
