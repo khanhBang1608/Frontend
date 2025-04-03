@@ -1,49 +1,62 @@
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      addresses: [
+        { id: 1, customerName: 'Nguyễn Văn A', phoneNumber: '0901234567', address: 'Hà Nội' },
+        { id: 2, customerName: 'Trần Thị B', phoneNumber: '0912345678', address: 'TP HCM' },
+      ],
+    }
+  },
+  methods: {
+    confirmDelete(id) {
+      if (confirm('Bạn có chắc chắn muốn xóa?')) {
+        this.addresses = this.addresses.filter((address) => address.id !== id)
+      }
+    },
+  },
+}
+</script>
 
 <template>
-  <div class="container mt-5">
-    <h2 class="text-center">Hồ Sơ Cá Nhân</h2>
-
-    <!-- Hiển thị thông báo cập nhật thành công -->
-    <div th:if="${successMessage}" class="alert alert-success">
-      <span th:text="${successMessage}"></span>
+  <div class="container mt-4">
+    <h2 class="text-center">Danh Sách Địa Chỉ</h2>
+    <div class="mb-3">
+      <a href="/user/address/add" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
+      </a>
     </div>
 
-    <form th:action="@{/user/profile/update}" method="post" th:object="${user}">
-      <!-- Họ và tên -->
-      <div class="mb-3">
-        <label for="name" class="form-label">Họ và Tên:</label>
-        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" />
-        <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-      </div>
-
-      <!-- Email (chỉ hiển thị, không sửa) -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          th:field="*{email}"
-          readonly
-        />
-      </div>
-
-      <!-- Địa chỉ -->
-      <div class="mb-3">
-        <label for="address" class="form-label">Địa chỉ:</label>
-        <input type="text" class="form-control" id="address" name="address" th:field="*{address}" />
-        <div
-          class="text-danger"
-          th:if="${#fields.hasErrors('address')}"
-          th:errors="*{address}"
-        ></div>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
-    </form>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Tên Khách Hàng</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th>Hành Động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="address in addresses" :key="address.id">
+            <td>{{ address.customerName }}</td>
+            <td>{{ address.phoneNumber }}</td>
+            <td>{{ address.address }}</td>
+            <td>
+              <div class="d-flex justify-content-center gap-2">
+                <a :href="'/user/address/edit/' + address.id" class="btn btn-warning btn-sm">
+                  <i class="bi bi-pencil"></i> Sửa
+                </a>
+                <button @click="confirmDelete(address.id)" class="btn btn-danger btn-sm">
+                  <i class="bi bi-trash"></i> Xóa
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
-<style src=""></style>
+<style></style>
