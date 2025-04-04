@@ -1,12 +1,12 @@
 <script setup>
 import SideBar from '../components/admin/SideBar.vue'
-import ManageCatgory from '../components/admin/ManageCatgory.vue'
+import ManageOrder from '../components/admin/ManageOrder.vue'
 </script>
 <template>
   <main class="admin-layout">
     <SideBar />
     <div class="content">
-      <ManageCatgory />
+      <ManageOrder />
     </div>
   </main>
 </template>

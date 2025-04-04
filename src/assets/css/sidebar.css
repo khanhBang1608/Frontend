@@ -17,7 +17,7 @@
 }
 
 .logo img {
-    width: 150px;
+    width: 100px;
 }
 
 .menu-item {
@@ -101,7 +101,7 @@
         justify-content: center;
     }
 
-    .sidebar:hover {
+    /* .sidebar:hover {
         width: 250px;
     }
 
@@ -117,7 +117,7 @@
 
     .sidebar:hover .menu-link {
         justify-content: flex-start;
-    }
+    } */
 }
 
 ol,

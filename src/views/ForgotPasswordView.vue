@@ -4,6 +4,6 @@ import ForgotPassword from '../components/User/ForgotPassword.vue'
 
 <template>
   <main>
-    <ForgotPassword />
+    <ForgotPassword/>
   </main>
 </template>

@@ -7,7 +7,7 @@ import Main from '../components/User/Main.vue'
 <template>
   <main>
     <Header />
-    <Main />
+    <Main/>
     <Footer />
   </main>
 </template>

@@ -7,6 +7,9 @@ import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import MyAddressView from '@/views/MyAddressView.vue'
 import ManageCategoryView from '@/views/ManageCategoryView.vue'
+import ManageProductView from '@/views/ManageProductView.vue'
+import ManageUserView from '@/views/ManageUserView.vue'
+import ManageOrder from '@/views/ManageOrderView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +53,21 @@ const router = createRouter({
       path: '/admin/category',
       name: 'category',
       component: ManageCategoryView,
+    },
+    {
+      path: '/admin/product',
+      name: 'product',
+      component: ManageProductView,
+    },
+    {
+      path: '/admin/user',
+      name: 'user',
+      component: ManageUserView,
+    },
+    {
+      path: '/admin/order',
+      name: 'order',
+      component: ManageOrder,
     },
     {
       path: '/about',
