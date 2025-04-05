@@ -107,3 +107,35 @@ function toggleFavorite(icon) {
         })
         .catch(error => console.error("Lỗi:", error));
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupTrendingSlider();
+    setupSportsSlider();
+    setupFavoriteIcons();
+    setupMainSlider(); // slide chính
+});
+
+function setupMainSlider() {
+    const $next = document.querySelector('.next');
+    const $prev = document.querySelector('.prev');
+    const slide = document.querySelector('.slide');
+
+    if ($next && $prev && slide) {
+        $next.addEventListener('click', () => {
+            const items = document.querySelectorAll('.item');
+            slide.appendChild(items[0]);
+        });
+
+        $prev.addEventListener('click', () => {
+            const items = document.querySelectorAll('.item');
+            slide.prepend(items[items.length - 1]);
+        });
+
+        // Nếu muốn xử lý click vào từng item
+        document.querySelectorAll('.item').forEach((item) => {
+            item.addEventListener('click', () => {
+                // Xử lý gì đó
+            });
+        });
+    }
+}
