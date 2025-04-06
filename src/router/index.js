@@ -9,7 +9,8 @@ import MyAddressView from '@/views/MyAddressView.vue'
 import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
-import ManageOrder from '@/views/ManageOrderView.vue'
+import ManageOrderView from '@/views/ManageOrderView.vue'
+import ManageDashboardView from '@/views/ManageDashboardView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,7 +68,12 @@ const router = createRouter({
     {
       path: '/admin/order',
       name: 'order',
-      component: ManageOrder,
+      component: ManageOrderView,
+    },
+    {
+      path: '/admin',
+      name: 'dashboard',
+      component: ManageDashboardView,
     },
     {
       path: '/about',
