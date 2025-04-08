@@ -1,13 +1,13 @@
 <script setup>
 import Header from '../components/User/Header.vue'
 import Footer from '../components/User/Footer.vue'
-import Main from '../components/User/Main.vue'
+import OrderHistory from '../components/User/OrderHistory.vue'
 </script>
 
 <template>
   <main>
     <Header />
-    <Main/>
+    <OrderHistory />
     <Footer />
   </main>
 </template>

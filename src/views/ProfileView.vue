@@ -1,13 +1,13 @@
 <script setup>
 import Header from '../components/User/Header.vue'
 import Footer from '../components/User/Footer.vue'
-import Main from '../components/User/Main.vue'
+import profile from '../components/User/ProFile.vue'
 </script>
 
 <template>
   <main>
     <Header />
-    <Main/>
+    <profile />
     <Footer />
   </main>
 </template>
