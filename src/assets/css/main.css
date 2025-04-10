@@ -221,13 +221,14 @@
   animation: animate 1s ease-in-out 0.3s 1 forwards;
 }
 
-.content button {
+.content button.view-more {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   opacity: 0;
   animation: animate 1s ease-in-out 0.6s 1 forwards;
 }
+
 
 @keyframes animate {
   from {
@@ -301,7 +302,7 @@
       font-size: 14px;
   }
 
-  .content button {
+  .content button.view-more {
       font-size: 14px;
       padding: 8px 16px;
   }
