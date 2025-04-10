@@ -11,6 +11,7 @@ import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
 import ManageOrderView from '@/views/ManageOrderView.vue'
+import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
 
@@ -71,6 +72,11 @@ const router = createRouter({
       path: '/admin/product',
       name: 'product',
       component: ManageProductView,
+    },
+    {
+      path: '/admin/product/form',
+      name: 'ProductFormView',
+      component: ProductFormView,
     },
     {
       path: '/admin/user',
