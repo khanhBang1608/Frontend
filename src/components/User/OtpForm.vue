@@ -8,16 +8,6 @@
             <h3>Xác thực Email</h3>
           </div>
           <div class="card-body">
-            <!-- Hiển thị thông báo lỗi -->
-            <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div>
-
-            <!-- Hiển thị thông báo thành công -->
-            <div
-              th:if="${message}"
-              class="alert alert-success text-center"
-              th:text="${message}"
-            ></div>
-
             <!-- Form gửi OTP -->
             <form action="/register/otp" method="post">
               <div class="mb-3">
