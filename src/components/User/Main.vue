@@ -3,6 +3,7 @@ import "@/assets/main.js";
 </script>
 <template>
   <div class="container my-1">
+    <div class="section" data-aos="fade-up">
       <div class="slide-container">
         <div class="slide">
           <div
@@ -14,7 +15,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Switzerland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -24,10 +25,10 @@ import "@/assets/main.js";
               background-image: url(https://taothuonghieu.com/wp-content/uploads/2023/10/3-khac-biet-chien-luoc-thuong-hieu-Nike.webp.webp);
             "
           >
-            <div class="content"> 
+            <div class="content">
               <div class="name">Finland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -40,7 +41,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Iceland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -53,7 +54,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Australia</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -66,7 +67,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Netherland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
           <!-- <div class="item"
@@ -83,7 +84,9 @@ import "@/assets/main.js";
           <button class="next"><i class="bi bi-arrow-right"></i></button>
         </div>
       </div>
+    </div>
     <div class="trending-section mt-4">
+      <div class="section" data-aos="fade-up">
         <div class="container">
           <!-- Tiêu đề và nút Shop với nút điều hướng -->
           <div class="d-flex justify-content-between align-items-center">
@@ -121,6 +124,8 @@ import "@/assets/main.js";
           </div>
         </div> -->
         </div>
+      </div>
+      <div class="section" data-aos="fade-up">
         <div class="container mt-5">
           <div class="d-flex justify-content-between align-items-center">
             <h2 class="fw-bold">Shop By Sport</h2>
@@ -181,6 +186,7 @@ import "@/assets/main.js";
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
