@@ -2,6 +2,8 @@
 
 <template>
   <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
     <h2 class="text-center">Hồ Sơ Cá Nhân</h2>
 
     <form th:action="@{/user/profile/update}" method="post" th:object="${user}">
@@ -36,9 +38,14 @@
         ></div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+      <div class="d-flex justify-content-start gap-2">
+            <button type="submit" class="btn btn-primary">Cập Nhật</button>
+            <a href="/" class="btn btn-secondary">Quay lại</a>
+          </div>
     </form>
   </div>
+</div>
+</div>
 </template>
 
 <style src=""></style>

@@ -20,6 +20,7 @@ onMounted(async () => {
       data-bs-toggle="modal"
       data-bs-target="#categoryModal"
       onclick="openModal(null, '', true)"
+      data-aos="false"
     >
       Thêm Mới
     </button>
@@ -89,3 +90,4 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+
