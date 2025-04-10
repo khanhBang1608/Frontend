@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import OtpFormView from '@/views/OtpFormView.vue'
 import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
@@ -10,7 +11,9 @@ import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
 import ManageOrderView from '@/views/ManageOrderView.vue'
+import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
+import OrderHistoryView from '@/views/OrderHistoryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +32,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView,
+    },
+    {
+      path: '/register/otp',
+      name: 'OtpFormView',
+      component: OtpFormView,
     },
     {
       path: '/forgot-password',
@@ -51,6 +59,11 @@ const router = createRouter({
       component: MyAddressView,
     },
     {
+      path: '/user/order/history',
+      name: 'order-history',
+      component: OrderHistoryView,
+    },
+    {
       path: '/admin/category',
       name: 'category',
       component: ManageCategoryView,
@@ -59,6 +72,11 @@ const router = createRouter({
       path: '/admin/product',
       name: 'product',
       component: ManageProductView,
+    },
+    {
+      path: '/admin/product/form',
+      name: 'ProductFormView',
+      component: ProductFormView,
     },
     {
       path: '/admin/user',

@@ -15,7 +15,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Switzerland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -28,7 +28,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Finland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Iceland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -54,7 +54,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Australia</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
 
@@ -67,7 +67,7 @@ import "@/assets/main.js";
             <div class="content">
               <div class="name">Netherland</div>
               <div class="des">Lorem ipsum dolor, sit amet!</div>
-              <button>see more</button>
+              <button class="view-more">see more</button>
             </div>
           </div>
           <!-- <div class="item"
