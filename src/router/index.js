@@ -14,6 +14,7 @@ import ManageOrderView from '@/views/ManageOrderView.vue'
 import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
+import FavoriteView from '@/views/FavoriteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,11 @@ const router = createRouter({
       path: '/user/order/history',
       name: 'order-history',
       component: OrderHistoryView,
+    },
+    {
+      path: '/user/favorite',
+      name: 'favorite',
+      component: FavoriteView,
     },
     {
       path: '/admin/category',
