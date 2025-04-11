@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const form = ref({
   email: '',
@@ -19,17 +22,25 @@ const errors = ref({
 
 const register = async () => {
   try {
-    errors.value = {} // clear lỗi cũ
+    errors.value = {} // Xóa lỗi cũ
 
-    // Gửi dữ liệu JSON (axios tự set Content-Type là application/json)
-    const response = await axios.post('http://localhost:8080/api/register', form.value)
+    const formData = new FormData()
+    formData.append('email', form.value.email)
+    formData.append('password', form.value.password)
+    formData.append('confirmPassword', form.value.confirmPassword)
+    formData.append('fullName', form.value.fullName)
+
+    await axios.post('http://localhost:8080/api/register', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
 
     alert('Đăng ký thành công!')
-    window.location.href = '/login'
+    router.push('/login')
   } catch (error) {
-    if (error.response) {
-      // Lấy lỗi từ backend trả về
-      errors.value.general = error.response.data
+    if (error.response && error.response.status === 400) {
+      errors.value = { ...errors.value, ...error.response.data } // Lỗi từ backend
     } else {
       errors.value.general = 'Lỗi kết nối server.'
     }
@@ -55,6 +66,7 @@ const register = async () => {
             id="email"
             placeholder="Nhập email của bạn"
           />
+          <div class="text-danger" v-if="errors.email">{{ errors.email }}</div>
         </div>
 
         <!-- Mật khẩu -->
@@ -67,6 +79,7 @@ const register = async () => {
             id="password"
             placeholder="Nhập mật khẩu"
           />
+          <div class="text-danger" v-if="errors.password">{{ errors.password }}</div>
         </div>
 
         <!-- Xác nhận mật khẩu -->
@@ -79,9 +92,7 @@ const register = async () => {
             id="confirmPassword"
             placeholder="Xác nhận mật khẩu"
           />
-          <div class="text-danger" v-if="form.password !== form.confirmPassword">
-            Mật khẩu không khớp.
-          </div>
+          <div class="text-danger" v-if="errors.confirmPassword">{{ errors.confirmPassword }}</div>
         </div>
 
         <!-- Họ tên -->
@@ -94,6 +105,7 @@ const register = async () => {
             id="fullName"
             placeholder="Nhập họ tên"
           />
+          <div class="text-danger" v-if="errors.fullName">{{ errors.fullName }}</div>
         </div>
 
         <!-- Nút Đăng ký -->
@@ -111,5 +123,4 @@ const register = async () => {
     </div>
   </div>
 </template>
-<style src="./src/assets/css/register.css">
-</style>
+<style src="./src/assets/css/register.css"></style>
