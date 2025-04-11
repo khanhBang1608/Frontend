@@ -11,50 +11,41 @@ const form = ref({
 const errors = ref({});
 const categories = ref([]);
 const modalTitle = ref("");
+const modalInstance = ref(null);
 
-// Hàm load lại danh sách danh mục
 const fetchCategories = async () => {
+  // Nếu DataTable đã khởi tạo thì phá huỷ trước
+  if ($.fn.DataTable.isDataTable("#categoryTable")) {
+    $("#categoryTable").DataTable().destroy();
+  }
+
   const res = await axios.get("http://localhost:8080/api/category/list");
   categories.value = res.data;
 
+  // Chờ DOM render xong dữ liệu
   await nextTick();
 
-  const table = $("#categoryTable").DataTable();
-  if (table) {
-    table.destroy();
-  }
-
-  $("#categoryTable").DataTable({
-    responsive: true,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json",
-    },
-  });
+  // Khởi tạo lại DataTable
+  initDataTable();
 };
 
 onMounted(fetchCategories);
 
-// Mở modal Thêm mới
 const openAddModal = () => {
-  form.value = {
-    id: null,
-    name: "",
-    status: true,
-  };
+  form.value = { id: null, name: "", status: true };
   modalTitle.value = "Thêm Mới Danh Mục";
   errors.value = {};
   const modal = new bootstrap.Modal(document.getElementById("categoryModal"));
+  modalInstance.value = modal;
   modal.show();
 };
 
-// Mở modal sửa
 const openEditModal = (category) => {
-  form.value.id = category.id;
-  form.value.name = category.name;
-  form.value.status = category.status;
+  form.value = { ...category };
   modalTitle.value = "Cập Nhật Danh Mục";
   errors.value = {};
   const modal = new bootstrap.Modal(document.getElementById("categoryModal"));
+  modalInstance.value = modal;
   modal.show();
 };
 
@@ -72,7 +63,6 @@ const handleSubmit = async () => {
   }
 };
 
-// Cập nhật danh mục
 const handleUpdate = async (categoryData) => {
   try {
     await axios.post(
@@ -81,21 +71,34 @@ const handleUpdate = async (categoryData) => {
     );
     alert("Danh mục đã được cập nhật thành công");
     resetForm();
-    await fetchCategories();
+    modalInstance.value.hide(); // đóng modal
+    await fetchCategories(); // load lại
   } catch (err) {
-    errors.value = err.response?.data || {};
+    if (err.response?.data?.error) {
+      // Hiển thị lỗi từ backend nếu có
+      errors.value = { name: err.response?.data.error };
+    } else {
+      // Xử lý các lỗi khác (nếu có)
+      errors.value = err.response?.data || {};
+    }
   }
 };
 
-// Thêm mới danh mục
 const handleAdd = async (categoryData) => {
   try {
     await axios.post("http://localhost:8080/api/category/add", categoryData);
     alert("Danh mục đã được thêm thành công");
     resetForm();
-    await fetchCategories();
+    modalInstance.value.hide(); // đóng modal
+    await fetchCategories(); // load lại
   } catch (err) {
-    errors.value = err.response?.data || {};
+    if (err.response?.data?.error) {
+      // Hiển thị lỗi từ backend nếu có
+      errors.value = { name: err.response?.data.error };
+    } else {
+      // Xử lý các lỗi khác (nếu có)
+      errors.value = err.response?.data || {};
+    }
   }
 };
 
@@ -107,6 +110,15 @@ const resetForm = () => {
     status: true,
   };
   errors.value = {};
+};
+
+const initDataTable = () => {
+  $("#categoryTable").DataTable({
+    responsive: true,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json",
+    },
+  });
 };
 </script>
 
