@@ -111,3 +111,5 @@ const register = async () => {
     </div>
   </div>
 </template>
+<style src="./src/assets/css/register.css">
+</style>
