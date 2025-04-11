@@ -19,16 +19,16 @@ const errors = ref({
 
 const register = async () => {
   try {
-    // Clear lỗi cũ
-    errors.value = {}
+    errors.value = {} // clear lỗi cũ
 
+    // Gửi dữ liệu JSON (axios tự set Content-Type là application/json)
     const response = await axios.post('http://localhost:8080/api/register', form.value)
 
     alert('Đăng ký thành công!')
-    // Sau khi đăng ký có thể chuyển sang login
     window.location.href = '/login'
   } catch (error) {
     if (error.response) {
+      // Lấy lỗi từ backend trả về
       errors.value.general = error.response.data
     } else {
       errors.value.general = 'Lỗi kết nối server.'
