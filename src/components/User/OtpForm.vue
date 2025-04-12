@@ -1,64 +1,68 @@
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
-const email = ref('')
-const otp = ref('')
-const message = ref('')
-const error = ref('')
-const isOtpSent = ref(false)
-const form = ref({ email: '' })
+const email = ref("");
+const otp = ref("");
+const message = ref("");
+const error = ref("");
+const isOtpSent = ref(false);
+const isSending = ref(false);
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
+
 const sendOtp = async () => {
-  error.value = ''
-  message.value = ''
+  if (isSending.value) return;
+  isSending.value = true;
+  error.value = "";
+  message.value = "";
   try {
-    const formData = new FormData()
-    formData.append('email', email.value)
+    const formData = new FormData();
+    formData.append("email", email.value);
 
-    const res = await axios.post('http://localhost:8080/api/register/otp', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-    message.value = res.data.message
-    error.value = ''
-    isOtpSent.value = true
+    const res = await axios.post("http://localhost:8080/api/register/otp", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    message.value = res.data.message;
+    isOtpSent.value = true;
   } catch (err) {
-    error.value = err.response?.data?.error || 'Lỗi gửi OTP'
-    message.value = ''
+    error.value = err.response?.data?.error || "Lỗi gửi OTP";
+  } finally {
+    isSending.value = false;
   }
-}
+};
 
 const confirmOtp = async () => {
-  error.value = ''
-  message.value = ''
+  error.value = "";
+  message.value = "";
   try {
-    const formData = new FormData()
-    formData.append('email', email.value)
-    formData.append('otp', otp.value)
+    const formData = new FormData();
+    formData.append("email", email.value);
+    formData.append("otp", otp.value);
 
-    const res = await axios.post('http://localhost:8080/api/register/otp', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
+    const res = await axios.post("http://localhost:8080/api/register/otp", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-    if (res.data.message === 'Xác thực OTP thành công.') {
-      message.value = res.data.message
-      error.value = ''
+    if (res.data.message === "Xác thực OTP thành công.") {
+      message.value = res.data.message;
+      error.value = "";
       if (res.data.email) {
-        router.push({ path: '/register', query: { email: res.data.email } })
+        router.push({ path: "/register", query: { email: res.data.email } });
       }
     } else {
-      error.value = 'Xác thực thất bại'
-      message.value = ''
+      error.value = "Xác thực thất bại";
+      message.value = "";
     }
   } catch (err) {
-    error.value = err.response?.data?.error || 'Xác thực thất bại'
-    message.value = ''
+    error.value = err.response?.data?.error || "Xác thực thất bại";
+    message.value = "";
   }
-}
+};
 </script>
 
 <template>
@@ -70,12 +74,22 @@ const confirmOtp = async () => {
             <h3>Xác thực Email</h3>
           </div>
           <div class="card-body">
-            <div class="mb-3">
-              <label class="form-label">Email:</label>
-              <input type="email" class="form-control" v-model="email" required />
+            <!-- Form đầu tiên để nhập email và gửi OTP -->
+            <div v-if="!isOtpSent">
+              <div class="mb-3">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" v-model="email" required />
+              </div>
+              <button
+                class="btn btn-primary w-100 mb-3"
+                @click="sendOtp"
+                :disabled="isSending"
+              >
+                {{ isSending ? "Đang gửi..." : "Gửi OTP" }}
+              </button>
             </div>
-            <button class="btn btn-primary w-100 mb-3" @click="sendOtp">Gửi OTP</button>
 
+            <!-- Form thứ hai để nhập OTP và xác nhận -->
             <div v-if="isOtpSent">
               <h5 class="text-center">Nhập mã OTP</h5>
               <div class="mb-3">
@@ -94,4 +108,6 @@ const confirmOtp = async () => {
   </div>
 </template>
 
-<style src=""></style>
+<style scoped>
+/* Thêm các kiểu tùy chỉnh nếu cần */
+</style>
