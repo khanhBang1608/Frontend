@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const form = ref({
   name: '',
@@ -8,7 +11,7 @@ const form = ref({
   price: 0,
   status: true,
   categoryId: '',
-  images: []
+  images: [],
 })
 
 const errors = ref({})
@@ -32,9 +35,10 @@ const handleSubmit = async () => {
 
   try {
     await axios.post('http://localhost:8080/api/product/add', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     })
     alert('Lưu thành công')
+    router.push('/admin/product')
   } catch (err) {
     errors.value = err.response.data
   }
@@ -49,21 +53,36 @@ const handleSubmit = async () => {
         <!-- Tên sản phẩm -->
         <div class="mb-3">
           <label class="form-label fw-semibold">Tên sản phẩm</label>
-          <input v-model="form.name" type="text" class="form-control" placeholder="Nhập tên sản phẩm" />
+          <input
+            v-model="form.name"
+            type="text"
+            class="form-control"
+            placeholder="Nhập tên sản phẩm"
+          />
           <div class="text-danger">{{ errors.name }}</div>
         </div>
 
         <!-- Mô tả -->
         <div class="mb-3">
           <label class="form-label fw-semibold">Mô tả</label>
-          <textarea v-model="form.description" class="form-control" rows="3" placeholder="Nhập mô tả sản phẩm"></textarea>
+          <textarea
+            v-model="form.description"
+            class="form-control"
+            rows="3"
+            placeholder="Nhập mô tả sản phẩm"
+          ></textarea>
           <div class="text-danger">{{ errors.description }}</div>
         </div>
 
         <!-- Giá -->
         <div class="mb-3">
           <label class="form-label fw-semibold">Giá</label>
-          <input v-model="form.price" type="number" class="form-control" placeholder="Nhập giá sản phẩm" />
+          <input
+            v-model="form.price"
+            type="number"
+            class="form-control"
+            placeholder="Nhập giá sản phẩm"
+          />
           <div class="text-danger">{{ errors.price }}</div>
         </div>
 
@@ -80,7 +99,12 @@ const handleSubmit = async () => {
         <!-- Hình ảnh -->
         <div class="mb-3">
           <label class="form-label fw-semibold">Hình ảnh</label>
-          <input type="file" multiple @change="e => form.images = Array.from(e.target.files)" class="form-control" />
+          <input
+            type="file"
+            multiple
+            @change="(e) => (form.images = Array.from(e.target.files))"
+            class="form-control"
+          />
           <div class="text-danger">{{ errors.images }}</div>
         </div>
 
