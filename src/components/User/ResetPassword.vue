@@ -1,0 +1,99 @@
+<script>
+</script>
+
+<template>
+  <div class="resetpassword-container">
+    <div class="card p-4 shadow" style="max-width: 400px; width: 100%">
+      <h2 class="text-center mb-4">Đặt Lại Mật Khẩu</h2>
+
+      <div v-if="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+      <div v-if="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
+
+      <form @submit="handleResetPassword">
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Mật khẩu mới</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPassword"
+            v-model="newPassword"
+            placeholder="Nhập mật khẩu mới"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            v-model="confirmPassword"
+            placeholder="Nhập lại mật khẩu"
+            required
+          />
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-dark" :disabled="isSubmitting">
+            {{ isSubmitting ? 'Đang xử lý...' : 'Đặt Lại Mật Khẩu' }}
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-3 text-center">
+        <a href="/login" class="text-secondary text-decoration-underline">Quay lại đăng nhập</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.resetpassword-container {
+    background-color: #f8f9fa;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.btn-dark {
+    background-color: #343a40;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #495057;
+    box-shadow: 0 0 8px rgba(52, 58, 64, 0.5);
+}
+
+a.text-secondary {
+    color: #6c757d !important;
+    text-decoration: underline;
+}
+
+a.text-secondary:hover {
+    color: #5a6268 !important;
+    text-decoration: none;
+}
+</style>
