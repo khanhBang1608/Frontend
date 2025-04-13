@@ -1,6 +1,58 @@
-<script>
-</script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useRouter, useRoute } from 'vue-router'
 
+const newPassword = ref('')
+const confirmPassword = ref('')
+const email = ref('')
+const successMessage = ref('')
+const errorMessage = ref('')
+const isSubmitting = ref(false)
+
+const router = useRouter()
+const route = useRoute()
+
+onMounted(() => {
+  email.value = route.query.email || ''
+})
+
+const handleResetPassword = async (e) => {
+  e.preventDefault()
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  if (newPassword.value !== confirmPassword.value) {
+    errorMessage.value = 'Mật khẩu xác nhận không khớp.'
+    return
+  }
+
+  isSubmitting.value = true
+
+  try {
+    const response = await axios.post('http://localhost:8080/api/reset-password', null, {
+      params: {
+        email: email.value,
+        newPassword: newPassword.value
+      }
+    })
+
+    if (response.data.status === 'success') {
+      successMessage.value = response.data.message
+      setTimeout(() => {
+        router.push('/login')
+      }, 1500)
+    } else {
+      errorMessage.value = response.data.message
+    }
+  } catch (err) {
+    console.error(err)
+    errorMessage.value = 'Đã xảy ra lỗi khi đặt lại mật khẩu.'
+  } finally {
+    isSubmitting.value = false
+  }
+}
+</script>
 <template>
   <div class="resetpassword-container">
     <div class="card p-4 shadow" style="max-width: 400px; width: 100%">
