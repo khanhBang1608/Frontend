@@ -15,14 +15,21 @@ const login = async () => {
     formData.append('email', email.value)
     formData.append('password', password.value)
 
-    const response = await axios.post('http://localhost:8080/api/login', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
+    const response = await axios.post(
+  'http://localhost:8080/api/login',
+  formData,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    withCredentials: true, // 👈 QUAN TRỌNG
+  }
+)
+
 
     const { token, user } = response.data
     localStorage.setItem('token', token)
+    localStorage.setItem('userId', user.id)
     router.push('/')
   } catch (err) {
     error.value = 'Email hoặc mật khẩu không đúng'
