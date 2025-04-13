@@ -47,7 +47,10 @@ const register = async () => {
     })
 
     alert('Đăng ký thành công!')
-    router.push('/login')
+    router.push('/login').then(() => {
+      // Tự động load lại trang sau khi chuyển hướng
+      window.location.reload()
+    })
   } catch (error) {
     if (error.response && error.response.status === 400) {
       errors.value = { ...errors.value, ...error.response.data }
