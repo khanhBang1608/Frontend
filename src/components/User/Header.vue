@@ -1,4 +1,5 @@
 <script></script>
+
 <template>
   <header th:fragment="header">
     <!-- Logo Bar -->
