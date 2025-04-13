@@ -4,6 +4,16 @@
 <template>
   <div class="resetpassword-container">
     <div class="card p-4 shadow" style="max-width: 400px; width: 100%">
+    <!-- Logo -->
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <img src="@/assets/images/Nike.png" alt="Nike" class="img-fluid" style="max-width: 50px" />
+        <img
+          src="@/assets/images/Jordan.png"
+          alt="Jordan"
+          class="img-fluid"
+          style="max-width: 50px"
+        />
+      </div>
       <h2 class="text-center mb-4">Đặt Lại Mật Khẩu</h2>
 
       <div v-if="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
