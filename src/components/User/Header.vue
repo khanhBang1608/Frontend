@@ -286,6 +286,7 @@
             <!-- Icon Yêu Thích (Trái Tim) -->
             <a href="/user/favorite" class="text-dark text-decoration-none mx-2">
               <i class="fa-solid fa-heart fs-5"></i>
+              
             </a>
 
             <!-- Icon Giỏ Hàng -->
