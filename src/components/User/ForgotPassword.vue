@@ -94,4 +94,4 @@ const handleForgotPassword = async (e) => {
   </div>
 </template>
 
-<style></style>
+<style src="./src/assets/css/forgotpassword.css"></style>
