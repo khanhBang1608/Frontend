@@ -23,9 +23,15 @@ const login = async () => {
 
     const { token, user } = response.data
     localStorage.setItem('token', token)
+
+    // Lưu thông tin người dùng vào cookie
+    document.cookie = `userId=${user.id}; path=/`
+    document.cookie = `userRole=${user.role}; path=/`
+    document.cookie = `userName=${user.name}; path=/`
+
     router.push('/')
   } catch (err) {
-    error.value = 'Email hoặc mật khẩu không đúng'
+    error.value = err.response?.data || 'Lỗi hệ thống'
   }
 }
 </script>
