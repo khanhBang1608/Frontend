@@ -1,4 +1,22 @@
-<script setup></script>
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const logout = () => {
+  // Xóa token và các thông tin người dùng khỏi localStorage
+  localStorage.removeItem('token')
+
+  // Xóa cookie nếu có
+  document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+  document.cookie = 'userRole=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+  document.cookie = 'userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+
+  router.push('/login').then(() => {
+    window.location.reload()
+  })
+}
+</script>
 
 <template>
   <header>
@@ -14,7 +32,7 @@
         <div class="d-flex align-items-center">
           <a href="/contact" class="text-dark text-decoration-none me-3">Tìm cửa hàng</a>
           <a href="/about" class="text-dark text-decoration-none me-3">Giới thiệu</a>
-          <a href="/logout" class="text-dark text-decoration-none me-3">Đăng xuất</a>
+          <a @click.prevent="logout" class="text-dark text-decoration-none me-3">Đăng xuất</a>
           <a href="/login" class="text-dark text-decoration-none me-3">Đăng nhập</a>
         </div>
       </div>
