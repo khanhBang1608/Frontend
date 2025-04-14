@@ -28,6 +28,8 @@ const login = async () => {
     document.cookie = `userId=${user.id}; path=/`
     document.cookie = `userRole=${user.role}; path=/`
     document.cookie = `userName=${user.name}; path=/`
+    document.cookie = `userEmail=${user.email}; path=/`
+    document.cookie = `userAvatar=${user.avatar}; path=/`
 
     router.push('/')
   } catch (err) {
