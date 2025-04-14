@@ -4,7 +4,26 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
-        <h2 class="text-center">Hồ Sơ Cá Nhân</h2>
+        <h2 class="text-center mb-4">Hồ Sơ Cá Nhân</h2>
+
+        <div class="text-center mb-4">
+          <img
+            src="@/assets/images/Jordan.png"
+            alt="Avatar"
+            class="shadow"
+            width="120"
+            height="120"
+            id="avatarPreview"
+          />
+          <div class="mt-2">
+            <input type="file" id="avatarInput" class="form-control" style="display: none;" />
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('avatarInput').click();">
+              Thay ảnh
+            </button>
+          </div>
+        </div>
+
+        <!-- Form -->
         <form action="/user/profile/update" method="post" id="profileForm">
           <!-- Họ và tên -->
           <div class="mb-3">
@@ -14,16 +33,9 @@
           </div>
 
           <!-- Email (chỉ hiển thị, không sửa) -->
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" name="email" readonly />
-          </div>
-
-          <!-- Địa chỉ -->
-          <div class="mb-3">
-            <label for="address" class="form-label">Địa chỉ:</label>
-            <input type="text" class="form-control" id="address" name="address" />
-            <div class="text-danger" id="addressError"></div>
           </div>
 
           <div class="d-flex justify-content-start gap-2">
@@ -36,4 +48,9 @@
   </div>
 </template>
 
-<style src=""></style>
+<style>
+img#avatarPreview {
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+</style>
