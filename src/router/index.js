@@ -15,6 +15,7 @@ import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
 import FavoriteView from '@/views/FavoriteView.vue'
+import ManageImage from '@/components/admin/ManageImage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -98,6 +99,11 @@ const router = createRouter({
       path: '/admin',
       name: 'dashboard',
       component: ManageDashboardView,
+    },
+    {
+      path: '/admin/product/images',
+      name: 'manageImage',
+      component: ManageImage,
     },
     {
       path: '/about',
