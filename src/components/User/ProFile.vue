@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-// Hàm lấy giá trị từ cookie
 const getCookie = (name) => {
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
   return match ? decodeURIComponent(match[2]) : null
@@ -31,6 +30,19 @@ onMounted(async () => {
     console.error('Lỗi khi lấy thông tin người dùng:', error)
   }
 })
+
+// Xử lý sự kiện thay đổi avatar
+const handleFileChange = (event) => {
+  const file = event.target.files ? event.target.files[0] : null
+  if (file) {
+    avatar.value = file
+    const reader = new FileReader()
+    reader.onload = () => {
+      previewUrl.value = reader.result
+    }
+    reader.readAsDataURL(file)
+  }
+}
 
 // Cập nhật thông tin người dùng
 const updateProfile = async () => {
@@ -62,13 +74,22 @@ const updateProfile = async () => {
         <h2 class="text-center mb-4">Hồ Sơ Cá Nhân</h2>
 
         <div class="text-center mb-4">
-          <img
-            :src="previewUrl"
-            alt="Avatar"
-            class="shadow"
-            width="120"
-            height="120"
-            id="avatarPreview"
+          <!-- Thêm label và input file -->
+          <label for="avatar" class="cursor-pointer">
+            <img
+              :src="previewUrl"
+              alt="Avatar"
+              class="shadow"
+              width="120"
+              height="120"
+              id="avatarPreview"
+            />
+          </label>
+          <input
+            type="file"
+            id="avatar"
+            class="d-none"
+            @change="handleFileChange"
           />
         </div>
 
@@ -81,15 +102,6 @@ const updateProfile = async () => {
           <div class="mb-4">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" v-model="email" readonly />
-          </div>
-
-          <div class="mb-3">
-            <label for="avatar" class="form-label">Avatar:</label>
-            <input
-              type="file"
-              class="form-control"
-              @change="(e) => (avatar.value = e.target.files[0])"
-            />
           </div>
 
           <div class="d-flex justify-content-start gap-2">
@@ -106,5 +118,13 @@ const updateProfile = async () => {
 img#avatarPreview {
   object-fit: cover;
   border: 2px solid #ccc;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
 }
 </style>
