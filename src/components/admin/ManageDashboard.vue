@@ -1,6 +1,78 @@
+<script>
+import { Chart } from 'chart.js/auto'
+
+export default {
+  name: 'Dashboard',
+  mounted() {
+    // Biểu đồ doanh thu
+    new Chart(this.$refs.revenueChart, {
+      type: 'line',
+      data: {
+        labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'],
+        datasets: [{
+          label: 'Doanh Thu (VND)',
+          data: [1000000, 1500000, 2000000, 1800000, 2500000, 3000000, 4000000],
+          borderColor: '#007bff',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
+
+    // Biểu đồ sản phẩm
+    new Chart(this.$refs.productChart, {
+      type: 'bar',
+      data: {
+        labels: ['Giày Thể Thao', 'Giày Chạy Bộ', 'Giày Thời Trang'],
+        datasets: [{
+          label: 'Số Lượng Bán',
+          data: [50, 70, 30],
+          backgroundColor: ['#007bff', '#28a745', '#ffc107']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
+
+    // Biểu đồ khách hàng
+    new Chart(this.$refs.customerChart, {
+      type: 'pie',
+      data: {
+        labels: ['Online', 'Cửa Hàng', 'Đại Lý'],
+        datasets: [{
+          label: 'Tỷ Lệ (%)',
+          data: [50, 30, 20],
+          backgroundColor: ['#007bff', '#28a745', '#ffc107']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: true
+          }
+        }
+      }
+    });
+  }
+}
+</script>
 <template>
-    <h2 class="text-center">DANH SÁCH ĐƠN HÀNG</h2>
-    <br>
+  <h2 class="text-center">DANH SÁCH ĐƠN HÀNG</h2>
+  <br />
   <div class="stats-container">
     <!-- Đơn Hàng -->
     <div class="stat-card">
@@ -46,6 +118,24 @@
       </div>
     </div>
   </div>
+  <!-- Biểu đồ doanh thu nằm riêng -->
+<div class="chart-container">
+  <h3>Doanh Thu Theo Ngày</h3>
+  <canvas ref="revenueChart" width="300" height="100"></canvas>
+</div>
+
+<!-- Hàng chứa 2 biểu đồ nằm ngang -->
+<div class="chart-row">
+  <div class="chart-container half">
+    <h3>Sản Phẩm</h3>
+    <canvas ref="productChart" width="400" height="300"></canvas>
+  </div>
+  <div class="chart-container half">
+    <h3>Nguồn Khách</h3>
+    <canvas ref="customerChart" width="400" height="300"></canvas>
+  </div>
+</div>
+
 </template>
 
 <style scoped>
@@ -117,4 +207,23 @@
 .bg-purple {
   background-color: #9c27b0;
 }
+.chart-row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.chart-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.chart-container.half {
+  flex: 1;
+}
+
 </style>
