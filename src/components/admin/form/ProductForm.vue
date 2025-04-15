@@ -3,9 +3,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const route = useRoute()
 const router = useRouter()
@@ -31,24 +28,20 @@ const loadCategories = async () => {
 
 // Load product details if editing
 const loadProduct = async () => {
-  if (!productId) return;
+  if (!productId) return
   try {
-    const res = await axios.get(`http://localhost:8080/api/product/${productId}`);
-    const product = res.data;
-    console.log(product);
+    const res = await axios.get(`http://localhost:8080/api/product/${productId}`)
+    const product = res.data
+    console.log(product)
 
-
-    form.value.name = product.name;
-    form.value.description = product.description;
-    form.value.price = product.price;
-    form.value.status = product.status;
-    form.value.categoryId = product.categoryId;
-    form.value.categoryNames = product.categoryNames;
-
-
-
+    form.value.name = product.name
+    form.value.description = product.description
+    form.value.price = product.price
+    form.value.status = product.status
+    form.value.categoryId = product.categoryId
+    form.value.categoryNames = product.categoryNames
   } catch (err) {
-    console.error('Cannot load product', err);
+    console.error('Cannot load product', err)
   }
 }
 
@@ -58,15 +51,15 @@ onMounted(async () => {
 })
 
 const handleSubmit = async () => {
-  const formData = new FormData();
-  formData.append('name', form.value.name);
-  formData.append('description', form.value.description);
-  formData.append('price', form.value.price);
-  formData.append('status', form.value.status);
-  formData.append('categoryId', form.value.categoryId);
+  const formData = new FormData()
+  formData.append('name', form.value.name)
+  formData.append('description', form.value.description)
+  formData.append('price', form.value.price)
+  formData.append('status', form.value.status)
+  formData.append('categoryId', form.value.categoryId)
   if (form.value.images.length > 0) {
     for (const img of form.value.images) {
-      formData.append('images', img);
+      formData.append('images', img)
     }
   }
 
@@ -78,15 +71,15 @@ const handleSubmit = async () => {
     router.push('/admin/product')
     if (productId) {
       await axios.post(`http://localhost:8080/api/product/update/${productId}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      alert('Cập nhật thành công');
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      alert('Cập nhật thành công')
       router.push('/admin/product')
     } else {
       await axios.post('http://localhost:8080/api/product/add', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      alert('Thêm thành công');
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      alert('Thêm thành công')
       router.push('/admin/product')
     }
 
@@ -96,15 +89,14 @@ const handleSubmit = async () => {
       price: 0,
       status: true,
       categoryId: '',
-      images: []
-    };
-    errors.value = {};
-
+      images: [],
+    }
+    errors.value = {}
   } catch (err) {
     if (err.response?.data) {
-      errors.value = err.response.data;
+      errors.value = err.response.data
     } else {
-      console.error('Unknown error', err);
+      console.error('Unknown error', err)
     }
   }
 }
@@ -170,7 +162,6 @@ const handleSubmit = async () => {
           </select>
         </div>
 
-
         <!-- Hình ảnh -->
         <div class="mb-3">
           <label class="form-label fw-semibold">Hình ảnh</label>
@@ -180,14 +171,21 @@ const handleSubmit = async () => {
             @change="(e) => (form.images = Array.from(e.target.files))"
             class="form-control"
           />
-          <input type="file" accept="image/*" multiple @change="e => form.images = Array.from(e.target.files)" class="form-control" />
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            @change="(e) => (form.images = Array.from(e.target.files))"
+            class="form-control"
+          />
           <div class="text-danger">{{ errors.images }}</div>
         </div>
 
-
         <!-- Nút hành động -->
         <div class="mb-2">
-          <button type="submit" class="btn btn-primary me-2">{{ productId ? 'Sửa sản phẩm' : 'Thêm sản phẩm' }}</button>
+          <button type="submit" class="btn btn-primary me-2">
+            {{ productId ? 'Sửa sản phẩm' : 'Thêm sản phẩm' }}
+          </button>
           <a href="/admin/product" class="btn btn-secondary">Quay lại</a>
         </div>
       </form>
@@ -195,13 +193,9 @@ const handleSubmit = async () => {
   </div>
 </template>
 
-    <style scoped>
-    .text-danger {
-      font-size: 13px;
-      color: red;
-    }
-    </style>
-
-
-
-
+<style scoped>
+.text-danger {
+  font-size: 13px;
+  color: red;
+}
+</style>
