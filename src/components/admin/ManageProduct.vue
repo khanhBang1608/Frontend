@@ -93,7 +93,7 @@ onMounted(() => {
               <a :href="`/admin/product/form?productId=${item.id}`">
                 <button class="btn btn-warning btn-sm">Sửa</button>
               </a>
-              <a :href="`/admin/product/image?productId=${item.id}`">
+              <a :href="`/admin/product/images?productId=${item.id}`">
                 <button class="btn btn-secondary btn-sm">Xem ảnh</button>
               </a>
               <a :href="`/admin/product/size?productId=${item.id}`">
