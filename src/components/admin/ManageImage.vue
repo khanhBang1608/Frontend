@@ -18,6 +18,26 @@ const loadImagesByProduct = async () => {
     console.error('Lỗi khi load ảnh:', err)
   }
 }
+const deleteImage = async (id) => {
+  if (!confirm('Bạn có chắc muốn xóa ảnh này?')) return
+  try {
+    const formData = new FormData()
+    formData.append('id', id) // Append ảnh cần xóa vào FormData
+
+    // Gửi yêu cầu DELETE
+    const res = await axios.post(`http://localhost:8080/api/product/image/delete`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
+    // Cập nhật danh sách ảnh sau khi xóa
+    imageList.value = imageList.value.filter((img) => img.id !== id)
+  } catch (err) {
+    console.error('Lỗi khi xóa ảnh:', err.response?.data || err.message)
+    alert('Không thể xóa ảnh!')
+  }
+}
 
 // Gọi hàm loadImagesByProduct khi component được mount
 onMounted(() => {
@@ -50,19 +70,18 @@ onMounted(() => {
           </thead>
           <tbody>
             <tr v-for="(img, index) in imageList" :key="img.id">
-              <td>{{ index + 1 }}</td>
+              <th scope="row">{{ index + 1 }}</th>
               <td>
                 <img
                   :src="`http://localhost:8080/images/${img.name}`"
-                  alt="Ảnh sản phẩm"
-                  style="width: auto; height: 50px"
+                  alt="product image"
+                  style="max-width: 100px; max-height: 100px"
+                  class="img-thumbnail"
                 />
               </td>
               <td>{{ img.name }}</td>
               <td>
-                <button class="btn btn-danger btn-sm" @click="handleDeleteImage(img.id)">
-                  Xóa
-                </button>
+                <button class="btn btn-danger btn-sm" @click="deleteImage(img.id)">Xóa</button>
               </td>
             </tr>
           </tbody>
