@@ -19,6 +19,7 @@ const login = async () => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+      withCredentials: true, // thêm dòng này để cookie gửi kèm
     })
 
     const { token, user } = response.data
