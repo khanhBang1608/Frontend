@@ -7,6 +7,7 @@ import ForgotPasswordView from '@/views/ForgotPasswordView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import MyAddressView from '@/views/MyAddressView.vue'
+import MyAddressFormView from '@/views/AddressFormView.vue'
 import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
@@ -63,6 +64,11 @@ const router = createRouter({
       component: MyAddressView,
     },
     {
+      path: '/user/address/form',
+      name: 'MyAddressFormView',
+      component: MyAddressFormView,
+    },
+    {
       path: '/user/order/history',
       name: 'order-history',
       component: OrderHistoryView,
@@ -71,7 +77,8 @@ const router = createRouter({
       path: '/user/favorite',
       name: 'favorite',
       component: FavoriteView,
-    },{
+    },
+    {
       path: '/verify-otp',
       name: 'verify-otp',
       component: VerifyOtpView,

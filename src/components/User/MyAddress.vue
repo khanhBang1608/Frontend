@@ -1,51 +1,54 @@
 <script></script>
 
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-    <h2 class="text-center">Hồ Sơ Cá Nhân</h2>
+  <div class="container mt-4">
+    <h2 class="text-center">Danh Sách Địa Chỉ</h2>
+    <div class="mb-3">
+      <a href="/user/address/form" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
+      </a>
+    </div>
 
-    <form th:action="@{/user/profile/update}" method="post" th:object="${user}">
-      <!-- Họ và tên -->
-      <div class="mb-3">
-        <label for="name" class="form-label">Họ và Tên:</label>
-        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" />
-        <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-      </div>
-
-      <!-- Email (chỉ hiển thị, không sửa) -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          th:field="*{email}"
-          readonly
-        />
-      </div>
-
-      <!-- Địa chỉ -->
-      <div class="mb-3">
-        <label for="address" class="form-label">Địa chỉ:</label>
-        <input type="text" class="form-control" id="address" name="address" th:field="*{address}" />
-        <div
-          class="text-danger"
-          th:if="${#fields.hasErrors('address')}"
-          th:errors="*{address}"
-        ></div>
-      </div>
-
-      <div class="d-flex justify-content-start gap-2">
-            <button type="submit" class="btn btn-primary">Cập Nhật</button>
-            <a href="/" class="btn btn-secondary">Quay lại</a>
-          </div>
-    </form>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Tên Khách Hàng</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th>Hành Động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="address : ${addresses}">
+            <td th:text="${address.customerName}"></td>
+            <td th:text="${address.phoneNumber}"></td>
+            <td th:text="${address.address}"></td>
+            <td>
+              <div class="d-flex justify-content-center gap-2">
+                <a
+                  th:href="@{/user/address/edit/{id}(id=${address.id})}"
+                  class="btn btn-warning btn-sm"
+                >
+                  <i class="bi bi-pencil"></i>
+                  Sửa
+                </a>
+                <form
+                  th:action="@{/user/address/delete/{id}(id=${address.id})}"
+                  method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash"></i> Xóa
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-</div>
 </template>
 
 <style src=""></style>
