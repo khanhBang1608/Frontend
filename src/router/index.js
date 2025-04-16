@@ -12,13 +12,14 @@ import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
 import ManageOrderView from '@/views/ManageOrderView.vue'
+import ManageOderDetailView from '@/views/ManageOderDetailView.vue'
 import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
 import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
-import ManageImage from  '@/views/ManageImageView.vue'
+import ManageImage from '@/views/ManageImageView.vue'
 import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
 
 const router = createRouter({
@@ -118,6 +119,11 @@ const router = createRouter({
       path: '/admin/order',
       name: 'order',
       component: ManageOrderView,
+    },
+    {
+      path: '/admin/order/detail',
+      name: 'ManageOderDManageOrderViewetailView',
+      component: ManageOderDetailView,
     },
     {
       path: '/admin',
