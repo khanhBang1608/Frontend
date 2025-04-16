@@ -19,6 +19,7 @@ import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
 import ManageImage from '@/components/admin/ManageImage.vue'
+import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,11 @@ const router = createRouter({
       name: 'MyAddressFormView',
       component: MyAddressFormView,
     },
+    {
+      path: '/user/address/edit/:id',
+      name: 'EditAddress',
+      component: EditAddressForm,
+    },    
     {
       path: '/user/order/history',
       name: 'order-history',
