@@ -19,6 +19,8 @@ import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
 import ManageImage from  '@/views/ManageImageView.vue'
+import ManageProductSize from '@/components/admin/ManageProductSize.vue'
+import ProductSizeFrom from '@/components/admin/form/ProductSizeFrom.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -122,6 +124,16 @@ const router = createRouter({
       path: '/admin/product/images',
       name: 'manageImage',
       component: ManageImage,
+    },
+    {
+      path: '/admin/product/sizes',
+      name: 'manageProductSize',
+      component: ManageProductSize,
+    },
+    {
+      path: '/admin/product/productSizeForm',
+      name: 'ProductSizeForm',
+      component: ProductSizeFrom,
     },
     {
       path: '/about',

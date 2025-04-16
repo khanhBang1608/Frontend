@@ -88,7 +88,7 @@ onMounted(() => {
                 {{ item.status ? 'Active' : 'Inactive' }}
               </span>
             </td>
-            <td>{{ item.category?.name }}</td>
+            <td>{{ item.categoryName }}</td>
             <td>
               <a :href="`/admin/product/form?productId=${item.id}`">
                 <button class="btn btn-warning btn-sm">Sửa</button>
@@ -96,7 +96,7 @@ onMounted(() => {
               <a :href="`/admin/product/images?productId=${item.id}`">
                 <button class="btn btn-secondary btn-sm">Xem ảnh</button>
               </a>
-              <a :href="`/admin/product/size?productId=${item.id}`">
+              <a :href="`/admin/product/sizes?productId=${item.id}`">
                 <button class="btn btn-primary btn-sm">Số Lượng</button>
               </a>
             </td>
