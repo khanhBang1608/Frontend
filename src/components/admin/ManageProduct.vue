@@ -88,7 +88,7 @@ onMounted(() => {
                 {{ item.status ? 'Active' : 'Inactive' }}
               </span>
             </td>
-            <td>{{ item.category?.name }}</td>
+            <td>{{ item.categoryName }}</td>
             <td>
               <a :href="`/admin/product/form?productId=${item.id}`">
                 <button class="btn btn-warning btn-sm">Sửa</button>
@@ -107,16 +107,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-@media (max-width: 768px) {
-  #productTable td img {
-    width: 40px;
-    height: 40px;
-  }
 
-  #productTable td,
-  #productTable th {
-    font-size: 14px;
-  }
-}
-</style>
