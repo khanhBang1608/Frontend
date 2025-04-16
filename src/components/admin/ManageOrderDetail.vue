@@ -4,16 +4,16 @@ import axios from 'axios'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const orderId = ref(route.query.orderId) // Lấy từ query string: ?orderId=3
+const orderId = ref(route.query.orderId)
 const orderDetail = ref({})
 const loading = ref(true)
 
 const formatPrice = (value) => {
   return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  }).format(value)
+    style: 'decimal',
+  }).format(value) + ' VND'
 }
+
 
 onMounted(async () => {
   try {
@@ -35,7 +35,6 @@ onMounted(async () => {
     <div class="card p-3 mb-4">
       <h5>Thông tin đơn hàng</h5>
       <p><strong>ID Đơn Hàng:</strong> {{ orderDetail.orderId }}</p>
-      <!-- Cập nhật key theo đúng dữ liệu -->
       <p><strong>Khách Hàng:</strong> {{ orderDetail.fullName }}</p>
       <p><strong>Ngày Tạo:</strong> {{ orderDetail.orderDate }}</p>
       <p><strong>Địa chỉ:</strong> {{ orderDetail.address }}</p>
@@ -61,7 +60,6 @@ onMounted(async () => {
       </thead>
       <tbody>
         <tr v-for="detail in orderDetail.items" :key="detail.id">
-          <!-- Kiểm tra lại field chính xác -->
           <td>{{ detail.productName }}</td>
           <td>{{ formatPrice(detail.price) }}</td>
           <td>{{ detail.quantity }}</td>
@@ -75,11 +73,6 @@ onMounted(async () => {
   </div>
 </template>
 
-<script>
-function formatPrice(value) {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value)
-}
-</script>
 <style scoped>
 @media (max-width: 768px) {
   #orderTable td img {
