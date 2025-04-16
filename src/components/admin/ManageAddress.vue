@@ -6,14 +6,18 @@ import { useRoute } from "vue-router";
 // Khai báo biến reactive cho danh sách địa chỉ
 const addresses = ref([]);
 
-// Lấy userId từ URL (query params)
-const route = useRoute();
-const userId = route.query.userId;  // userId sẽ được lấy từ URL
+// Lấy userId từ props
+const props = defineProps({
+  userId: {
+    type: String,
+    required: true,
+  }
+});
 
 // Hàm để lấy danh sách địa chỉ từ API
 const fetchAddresses = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/addresses/user/${userId}`);
+    const response = await axios.get(`http://localhost:8080/api/addresses/user/${props.userId}`);
     addresses.value = response.data; // Gán dữ liệu vào biến addresses
     initDataTable(); // Khởi tạo DataTable sau khi dữ liệu đã được tải
   } catch (error) {

@@ -22,6 +22,7 @@ import ResetPasswordView from '@/views/ResetPasswordView.vue'
 
 import ManageImage from '@/views/ManageImageView.vue'
 import ManageProductSize from '@/views/manageProductSizeView.vue'
+import ManageAddressView from '@/views/ManageAddressView.vue'
 import ProductSizeFrom from '@/views/ProductSizeFormView.vue'
 
 import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
@@ -118,6 +119,12 @@ const router = createRouter({
       path: '/admin/user',
       name: 'user',
       component: ManageUserView,
+    },
+    {
+      path: '/admin/address',
+      name: 'address',
+      component: ManageAddressView,
+      props: (route) => ({ userId: route.query.userId })
     },
     {
       path: '/admin/order',
