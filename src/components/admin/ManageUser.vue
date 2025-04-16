@@ -44,14 +44,15 @@ const updateStatus = async (userId, newStatus) => {
   try {
     const response = await axios.put(
       `http://localhost:8080/api/user/users/${userId}/status`,
-      newStatus, // gửi boolean trực tiếp
+      newStatus,
       {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     console.log("Trạng thái đã được cập nhật");
+    alert("Cập nhật trạng thái thành công!");
   } catch (error) {
     console.error("Lỗi khi cập nhật trạng thái:", error);
     const errorMessage = document.getElementById("error-message");
@@ -61,7 +62,6 @@ const updateStatus = async (userId, newStatus) => {
     }
   }
 };
-
 </script>
 <template>
   <div class="container mt-4">
@@ -76,8 +76,8 @@ const updateStatus = async (userId, newStatus) => {
             <th>ID</th>
             <th>Tên</th>
             <th>Email</th>
-            <th>Địa chỉ</th>
             <th>Trạng thái</th>
+            <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -86,7 +86,6 @@ const updateStatus = async (userId, newStatus) => {
             <td>{{ user.id }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.address || "Chưa cập nhật" }}</td>
             <td>
               <select
                 v-model="user.status"
@@ -96,6 +95,11 @@ const updateStatus = async (userId, newStatus) => {
                 <option :value="true" :selected="user.status">Hoạt động</option>
                 <option :value="false" :selected="!user.status">Không hoạt động</option>
               </select>
+            </td>
+            <td>
+              <a :href="`/admin/address/list?userId=${user.id}`">
+                <button class="btn btn-primary btn-sm">Xem địa chỉ</button>
+              </a>
             </td>
           </tr>
         </tbody>
