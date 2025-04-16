@@ -9,13 +9,13 @@ const router = useRouter()
 const productId = Number(route.query.productId)
 
 const form = ref({
-  name: '',
-  description: '',
+  name: "",
+  description: "",
   price: 0,
   status: true,
-  categoryId: '',
+  categoryId: "",
   images: [],
-})
+});
 
 const categories = ref([])
 const errors = ref({})
@@ -60,6 +60,7 @@ const handleSubmit = async () => {
   if (form.value.images.length > 0) {
     for (const img of form.value.images) {
       formData.append('images', img)
+
     }
   }
 
@@ -94,7 +95,7 @@ const handleSubmit = async () => {
       console.error('Unknown error', err)
     }
   }
-}
+};
 </script>
 
 <template>

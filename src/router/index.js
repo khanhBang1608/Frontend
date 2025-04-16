@@ -12,15 +12,20 @@ import ManageCategoryView from '@/views/ManageCategoryView.vue'
 import ManageProductView from '@/views/ManageProductView.vue'
 import ManageUserView from '@/views/ManageUserView.vue'
 import ManageOrderView from '@/views/ManageOrderView.vue'
+import ManageOderDetailView from '@/views/ManageOderDetailView.vue'
 import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
 import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
+
 import ManageImage from  '@/views/ManageImageView.vue'
 import ManageProductSize from '@/components/admin/ManageProductSize.vue'
 import ProductSizeFrom from '@/components/admin/form/ProductSizeFrom.vue'
+
+import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +76,11 @@ const router = createRouter({
       component: MyAddressFormView,
     },
     {
+      path: '/user/address/edit/:id',
+      name: 'EditAddress',
+      component: EditAddressForm,
+    },
+    {
       path: '/user/order/history',
       name: 'order-history',
       component: OrderHistoryView,
@@ -114,6 +124,11 @@ const router = createRouter({
       path: '/admin/order',
       name: 'order',
       component: ManageOrderView,
+    },
+    {
+      path: '/admin/order/detail',
+      name: 'ManageOderDManageOrderViewetailView',
+      component: ManageOderDetailView,
     },
     {
       path: '/admin',

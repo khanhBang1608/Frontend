@@ -107,16 +107,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-@media (max-width: 768px) {
-  #productTable td img {
-    width: 40px;
-    height: 40px;
-  }
 
-  #productTable td,
-  #productTable th {
-    font-size: 14px;
-  }
-}
-</style>

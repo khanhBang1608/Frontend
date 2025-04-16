@@ -1,12 +1,69 @@
-<script></script>
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      addresses: [],
+    };
+  },
+  methods: {
+    // Lấy giá trị cookie theo tên
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+      return null;
+    },
+
+    // Gọi API lấy danh sách địa chỉ của user
+    loadAddresses() {
+      const userId = this.getCookie("userId");  // Lấy userId từ cookie
+      if (!userId) {
+        alert("Không tìm thấy userId trong cookie!");
+        return;
+      }
+
+      // Gọi API để lấy địa chỉ của user dựa trên userId
+      axios
+        .get(`http://localhost:8080/api/addresses/user/${userId}`)
+        .then((res) => {
+          this.addresses = res.data;  // Cập nhật dữ liệu vào addresses
+        })
+        .catch((err) => {
+          console.error("Lỗi khi lấy địa chỉ:", err);
+        });
+    },
+
+    // Xóa địa chỉ
+    deleteAddress(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa?")) {
+        axios
+          .delete(`http://localhost:8080/api/addresses/${id}`)
+          .then(() => {
+            this.loadAddresses(); // Tải lại danh sách địa chỉ sau khi xóa
+          })
+          .catch((err) => {
+            console.error("Lỗi khi xóa:", err);
+          });
+      }
+    },
+  },
+
+  mounted() {
+    this.loadAddresses();  // Gọi phương thức loadAddresses khi component được mount
+  },
+};
+</script>
 
 <template>
   <div class="container mt-4">
-    <h2 class="text-center">Danh Sách Địa Chỉ</h2>
+    <h2 class="text-center">📍 Danh Sách Địa Chỉ</h2>
+
     <div class="mb-3">
-      <a href="/user/address/form" class="btn btn-primary">
+      <router-link to="/user/address/form" class="btn btn-primary">
         <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
-      </a>
+      </router-link>
     </div>
 
     <div class="table-responsive">
@@ -20,28 +77,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="address : ${addresses}">
-            <td th:text="${address.customerName}"></td>
-            <td th:text="${address.phoneNumber}"></td>
-            <td th:text="${address.address}"></td>
+          <tr v-for="address in addresses" :key="address.id">
+            <td>{{ address.customerName }}</td>
+            <td>{{ address.phone }}</td>
+            <td>{{ address.address }}</td>
             <td>
               <div class="d-flex justify-content-center gap-2">
-                <a
-                  th:href="@{/user/address/edit/{id}(id=${address.id})}"
+                <router-link
+                  :to="`/user/address/edit/${address.id}`"
                   class="btn btn-warning btn-sm"
                 >
-                  <i class="bi bi-pencil"></i>
-                  Sửa
-                </a>
-                <form
-                  th:action="@{/user/address/delete/{id}(id=${address.id})}"
-                  method="post"
-                  onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')"
+                  <i class="bi bi-pencil"></i> Sửa
+                </router-link>
+                <button
+                  class="btn btn-danger btn-sm"
+                  @click="deleteAddress(address.id)"
                 >
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    <i class="bi bi-trash"></i> Xóa
-                  </button>
-                </form>
+                  <i class="bi bi-trash"></i> Xóa
+                </button>
               </div>
             </td>
           </tr>
@@ -51,4 +104,9 @@
   </div>
 </template>
 
-<style src=""></style>
+<style scoped>
+.table th,
+.table td {
+  vertical-align: middle;
+}
+</style>
