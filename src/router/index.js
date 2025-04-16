@@ -20,12 +20,11 @@ import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
 
-import ManageImage from  '@/views/ManageImageView.vue'
-import ManageProductSize from '@/components/admin/ManageProductSize.vue'
-import ProductSizeFrom from '@/components/admin/form/ProductSizeFrom.vue'
+import ManageImage from '@/views/ManageImageView.vue'
+import ManageProductSize from '@/views/manageProductSizeView.vue'
+import ProductSizeFrom from '@/views/ProductSizeFormView.vue'
 
 import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
