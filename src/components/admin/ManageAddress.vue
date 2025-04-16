@@ -1,49 +1,42 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRoute } from "vue-router";
+import { ref, onMounted, nextTick } from 'vue'
+import axios from 'axios'
+import { useRoute } from 'vue-router'
 
-// Khai báo biến reactive cho danh sách địa chỉ
-const addresses = ref([]);
+const addresses = ref([])
+const route = useRoute()
+const userId = ref(route.query.userId)
 
-// Lấy userId từ props
-const props = defineProps({
-  userId: {
-    type: String,
-    required: true,
-  }
-});
-
-// Hàm để lấy danh sách địa chỉ từ API
 const fetchAddresses = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/addresses/user/${props.userId}`);
-    addresses.value = response.data; // Gán dữ liệu vào biến addresses
-    initDataTable(); // Khởi tạo DataTable sau khi dữ liệu đã được tải
-  } catch (error) {
-    console.error("Error fetching addresses:", error);
-  }
-};
+    const response = await axios.get(`http://localhost:8080/api/addresses/user/${userId.value}`)
+    addresses.value = response.data
+    console.log('Danh sách địa chỉ:', addresses.value)
 
-// Hàm khởi tạo DataTable
+    await nextTick()
+    initDataTable()
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách địa chỉ:', error)
+  }
+}
+
 const initDataTable = () => {
-  const table = $("#addressTable");
-  if ($.fn.dataTable.isDataTable("#addressTable")) {
-    table.DataTable().destroy(); // Xóa bảng cũ nếu có
+  const table = $('#addressTable')
+  if ($.fn.dataTable.isDataTable('#addressTable')) {
+    table.DataTable().destroy()
   }
 
   table.DataTable({
     responsive: true,
     language: {
-      url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json",
+      url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json',
     },
-  });
-};
+  })
+}
 
-// Gọi fetchAddresses khi component được mount
 onMounted(() => {
-  fetchAddresses();
-});
+  fetchAddresses()
+})
 </script>
 
 <template>
@@ -51,10 +44,7 @@ onMounted(() => {
     <h2 class="text-center">Danh Sách Địa Chỉ</h2>
 
     <div class="table-responsive">
-      <table
-        id="addressTable"
-        class="table table-bordered table-hover text-center align-middle"
-      >
+      <table id="addressTable" class="table table-bordered table-hover text-center align-middle">
         <thead class="table-dark">
           <tr>
             <th>Tên Khách Hàng</th>
