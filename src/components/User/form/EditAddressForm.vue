@@ -44,9 +44,21 @@ const loadAddress = async () => {
 const updateAddress = async () => {
   error.value = null
   successMessage.value = null
-
+  
   if (!address.value.customerName || !address.value.phone || !address.value.address) {
     error.value = 'Vui lòng điền đầy đủ thông tin.'
+    return
+  }
+  
+  const isTenDigits = /^[0-9]{10}$/.test(address.value.phone)
+  if (!isTenDigits) {
+    error.value = 'Số điện thoại phải có đúng 10 chữ số.'
+    return
+  }
+
+  const validPrefix = /^(03|05|07|08|09)/.test(address.value.phone)
+  if (!validPrefix) {
+    error.value = 'Số điện thoại phải bắt đầu bằng 03, 05, 07, 08 hoặc 09.'
     return
   }
 
