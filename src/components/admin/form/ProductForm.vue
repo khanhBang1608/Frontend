@@ -9,13 +9,13 @@ const router = useRouter()
 const productId = Number(route.query.productId)
 
 const form = ref({
-  name: "",
-  description: "",
+  name: '',
+  description: '',
   price: 0,
   status: true,
-  categoryId: "",
+  categoryId: '',
   images: [],
-});
+})
 
 const categories = ref([])
 const errors = ref({})
@@ -38,7 +38,7 @@ const loadProduct = async () => {
     form.value.description = product.description
     form.value.price = product.price
     form.value.status = product.status
-    form.value.categoryId = product.categoryId
+    form.value.categoryId = product.category.id
     form.value.categoryNames = product.categoryNames
   } catch (err) {
     console.error('Cannot load product', err)
@@ -60,7 +60,6 @@ const handleSubmit = async () => {
   if (form.value.images.length > 0) {
     for (const img of form.value.images) {
       formData.append('images', img)
-
     }
   }
 
@@ -95,7 +94,7 @@ const handleSubmit = async () => {
       console.error('Unknown error', err)
     }
   }
-};
+}
 </script>
 
 <template>

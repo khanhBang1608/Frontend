@@ -1,59 +1,59 @@
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
   data() {
     return {
       addresses: [],
-    };
+    }
   },
   methods: {
     // Lấy giá trị cookie theo tên
     getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(";").shift();
-      return null;
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; ${name}=`)
+      if (parts.length === 2) return parts.pop().split(';').shift()
+      return null
     },
 
     // Gọi API lấy danh sách địa chỉ của user
     loadAddresses() {
-      const userId = this.getCookie("userId");  // Lấy userId từ cookie
+      const userId = this.getCookie('userId') // Lấy userId từ cookie
       if (!userId) {
-        alert("Không tìm thấy userId trong cookie!");
-        return;
+        alert('Không tìm thấy userId trong cookie!')
+        return
       }
 
       // Gọi API để lấy địa chỉ của user dựa trên userId
       axios
         .get(`http://localhost:8080/api/addresses/user/${userId}`)
         .then((res) => {
-          this.addresses = res.data;  // Cập nhật dữ liệu vào addresses
+          this.addresses = res.data // Cập nhật dữ liệu vào addresses
         })
         .catch((err) => {
-          console.error("Lỗi khi lấy địa chỉ:", err);
-        });
+          console.error('Lỗi khi lấy địa chỉ:', err)
+        })
     },
 
     // Xóa địa chỉ
     deleteAddress(id) {
-      if (confirm("Bạn có chắc chắn muốn xóa?")) {
+      if (confirm('Bạn có chắc chắn muốn xóa?')) {
         axios
           .delete(`http://localhost:8080/api/addresses/${id}`)
           .then(() => {
-            this.loadAddresses(); // Tải lại danh sách địa chỉ sau khi xóa
+            this.loadAddresses() // Tải lại danh sách địa chỉ sau khi xóa
           })
           .catch((err) => {
-            console.error("Lỗi khi xóa:", err);
-          });
+            console.error('Lỗi khi xóa:', err)
+          })
       }
     },
   },
 
   mounted() {
-    this.loadAddresses();  // Gọi phương thức loadAddresses khi component được mount
+    this.loadAddresses() // Gọi phương thức loadAddresses khi component được mount
   },
-};
+}
 </script>
 
 <template>
@@ -89,10 +89,7 @@ export default {
                 >
                   <i class="bi bi-pencil"></i> Sửa
                 </router-link>
-                <button
-                  class="btn btn-danger btn-sm"
-                  @click="deleteAddress(address.id)"
-                >
+                <button class="btn btn-danger btn-sm" @click="deleteAddress(address.id)">
                   <i class="bi bi-trash"></i> Xóa
                 </button>
               </div>

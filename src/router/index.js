@@ -27,135 +27,135 @@ import ProductSizeFrom from '@/views/ProductSizeFormView.vue'
 import EditAddressForm from '@/components/User/form/EditAddressForm.vue'
 
 const routes = [
-  { 
-    path: '/', 
-    name: 'home', 
-    component: HomeView 
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
   },
-  { 
-    path: '/login', 
-    name: 'login', 
-    component: LoginView 
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView,
   },
-  { 
-    path: '/register', 
-    name: 'register', 
-    component: RegisterView 
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterView,
   },
-  { 
-    path: '/register/otp', 
-    name: 'OtpFormView', 
-    component: OtpFormView 
+  {
+    path: '/register/otp',
+    name: 'OtpFormView',
+    component: OtpFormView,
   },
-  { 
+  {
     path: '/forgot-password',
-     name: 'forgot-password', 
-     component: ForgotPasswordView 
+    name: 'forgot-password',
+    component: ForgotPasswordView,
   },
-  { 
-    path: '/user/change-password', 
-    name: 'change-password', 
-    component: ChangePasswordView 
+  {
+    path: '/user/change-password',
+    name: 'ChangePasswordView',
+    component: ChangePasswordView,
   },
-  { 
-    path: '/user/profile', 
-    name: 'profile', 
-    component: ProfileView 
+  {
+    path: '/user/profile',
+    name: 'ProfileView',
+    component: ProfileView,
   },
-  { 
-    path: '/user/address', 
-    name: 'address', 
-    component: MyAddressView 
+  {
+    path: '/user/address',
+    name: 'MyAddressView',
+    component: MyAddressView,
   },
-  { 
-    path: '/user/address/form', 
-    name: 'MyAddressFormView', 
-    component: MyAddressFormView 
+  {
+    path: '/user/address/form',
+    name: 'MyAddressFormView',
+    component: MyAddressFormView,
   },
-  { 
-    path: '/user/address/edit/:id', 
-    name: 'EditAddress', 
-    component: EditAddressForm 
+  {
+    path: '/user/address/edit/:id',
+    name: 'EditAddressForm',
+    component: EditAddressForm,
   },
-  { 
-    path: '/user/order/history', 
-    name: 'order-history', 
-    component: OrderHistoryView 
+  {
+    path: '/user/order/history',
+    name: 'OrderHistoryView',
+    component: OrderHistoryView,
   },
-  { 
-    path: '/user/favorite', 
-    name: 'favorite', 
-    component: FavoriteView 
+  {
+    path: '/user/favorite',
+    name: 'FavoriteView',
+    component: FavoriteView,
   },
-  { 
-    path: '/verify-otp', 
-    name: 'verify-otp', 
-    component: VerifyOtpView 
+  {
+    path: '/verify-otp',
+    name: 'VerifyOtpView',
+    component: VerifyOtpView,
   },
-  { 
-    path: '/product', 
-    name: 'product', 
-    component: ProductView 
+  {
+    path: '/product',
+    name: 'ProductView',
+    component: ProductView,
   },
-  { 
-    path: '/reset-password', 
-    name: 'reset-password', 
-    component: ResetPasswordView 
+  {
+    path: '/reset-password',
+    name: 'ResetPasswordView',
+    component: ResetPasswordView,
   },
-  { 
-    path: '/admin/category', 
-    name: 'category', 
-    component: ManageCategoryView 
+  {
+    path: '/admin/category',
+    name: 'ManageCategoryView',
+    component: ManageCategoryView,
   },
-  { 
-    path: '/admin/product', 
-    name: 'product', 
-    component: ManageProductView 
+  {
+    path: '/admin/product',
+    name: 'ManageProductView',
+    component: ManageProductView,
   },
-  { 
-    path: '/admin/product/form', 
-    name: 'ProductFormView', 
-    component: ProductFormView 
+  {
+    path: '/admin/product/form',
+    name: 'ProductFormView',
+    component: ProductFormView,
   },
-  { 
-    path: '/admin/user', 
-    name: 'user', 
-    component: ManageUserView 
+  {
+    path: '/admin/user',
+    name: 'user',
+    component: ManageUserView,
   },
-  { 
-    path: '/admin/address/list', 
-    name: 'address', 
-    component: ManageAddressView 
+  {
+    path: '/admin/address/list',
+    name: 'address',
+    component: ManageAddressView,
   },
-  { 
-    path: '/admin/order', 
-    name: 'order', 
-    component: ManageOrderView 
+  {
+    path: '/admin/order',
+    name: 'order',
+    component: ManageOrderView,
   },
   {
     path: '/admin/order/detail',
     name: 'ManageOderDManageOrderViewetailView',
     component: ManageOderDetailView,
   },
-  { 
-    path: '/admin', 
-    name: 'dashboard', 
-    component: ManageDashboardView 
+  {
+    path: '/admin',
+    name: 'dashboard',
+    component: ManageDashboardView,
   },
-  { 
-    path: '/admin/product/images', 
-    name: 'manageImage', 
-    component: ManageImage 
+  {
+    path: '/admin/product/images',
+    name: 'manageImage',
+    component: ManageImage,
   },
-  { 
-    path: '/admin/product/sizes', 
-    name: 'manageProductSize', 
-    component: ManageProductSize 
+  {
+    path: '/admin/product/sizes',
+    name: 'manageProductSize',
+    component: ManageProductSize,
   },
-  { 
-    path: '/admin/product/productSizeForm', 
-    name: 'ProductSizeForm', 
-    component: ProductSizeFrom 
+  {
+    path: '/admin/product/productSizeForm',
+    name: 'ProductSizeForm',
+    component: ProductSizeFrom,
   },
   {
     path: '/about',

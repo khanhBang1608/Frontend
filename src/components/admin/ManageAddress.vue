@@ -9,7 +9,7 @@ const userId = ref(route.query.userId)
 
 const fetchAddresses = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/api/addresses/user/${userId.value}`)
+    const response = await axios.get(`http://localhost:8080/api/addresses/admin/${userId.value}`)
     addresses.value = response.data
     console.log('Danh sách địa chỉ:', addresses.value)
 
