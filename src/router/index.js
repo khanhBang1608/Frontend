@@ -19,6 +19,7 @@ import OrderHistoryView from '@/views/OrderHistoryView.vue'
 import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ProductView from '@/views/ProductView.vue'
+import ProductDetailView from '@/views/ProductDetailView.vue'
 import ResetPasswordView from '@/views/ResetPasswordView.vue'
 import ManageImage from '@/views/ManageImageView.vue'
 import ManageProductSize from '@/views/manageProductSizeView.vue'
@@ -96,6 +97,11 @@ const routes = [
     path: '/product',
     name: 'ProductView',
     component: ProductView,
+  },
+  {
+    path: '/product/detail',
+    name: 'ProductDetailView',
+    component: ProductDetailView,
   },
   {
     path: '/reset-password',
