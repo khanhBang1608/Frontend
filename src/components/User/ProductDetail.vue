@@ -45,6 +45,46 @@ onMounted(async () => {
     }
   }
 })
+
+const addToCart = async () => {
+  const userId = getCookie('userId')
+  if (!userId) {
+    alert('Vui lòng đăng nhập để thêm vào giỏ hàng.')
+    return
+  }
+
+  if (!selectedSize.value) {
+    alert('Vui lòng chọn size trước khi thêm vào giỏ.')
+    return
+  }
+
+  const cartId = userId // vì cartId = userId
+  const productSizeId = selectedSize.value.id
+  const qty = quantity.value
+
+  try {
+    const res = await axios.post(`http://localhost:8080/api/cart/user/add`, null, {
+      params: {
+        cartId,
+        productSizeId,
+        quantity: qty,
+      },
+    })
+
+    console.log('Đã thêm vào giỏ:', res.data)
+    alert('Đã thêm sản phẩm vào giỏ hàng!')
+    openCartModal()
+  } catch (err) {
+    console.error('Lỗi khi thêm vào giỏ:', err)
+    alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.')
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 </script>
 
 <template>
@@ -88,9 +128,8 @@ onMounted(async () => {
         </div>
 
         <div class="d-flex justify-content-between">
-          <button class="btn btn-dark btn-custom" @click="openCartModal">
-            🛒 Thêm vào giỏ hàng
-          </button>
+          <button class="btn btn-dark btn-custom" @click="addToCart">🛒 Thêm vào giỏ hàng</button>
+
           <button class="btn btn-danger btn-custom">⚡ Mua ngay</button>
         </div>
       </div>
