@@ -1,44 +1,44 @@
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import axios from "axios";
+import { ref, onMounted, nextTick } from 'vue'
+import axios from 'axios'
 
-const users = ref([]);
+const users = ref([])
 
 const initDataTable = () => {
-  const table = $("#userTable");
-  if ($.fn.dataTable.isDataTable("#userTable")) {
-    table.DataTable().destroy();
+  const table = $('#userTable')
+  if ($.fn.dataTable.isDataTable('#userTable')) {
+    table.DataTable().destroy()
   }
 
   table.DataTable({
     responsive: true,
     language: {
-      url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json",
+      url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json',
     },
-  });
-};
+  })
+}
 
 const loadUsers = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/api/user/users");
-    console.log(response.data);
-    users.value = response.data;
+    const response = await axios.get('http://localhost:8080/api/user/users')
+    console.log(response.data)
+    users.value = response.data
 
-    await nextTick();
-    initDataTable();
+    await nextTick()
+    initDataTable()
   } catch (error) {
-    console.error("Lỗi khi tải danh sách khách hàng:", error);
-    const errorMessage = document.getElementById("error-message");
+    console.error('Lỗi khi tải danh sách khách hàng:', error)
+    const errorMessage = document.getElementById('error-message')
     if (errorMessage) {
-      errorMessage.style.display = "block";
-      errorMessage.textContent = "Không thể tải dữ liệu khách hàng!";
+      errorMessage.style.display = 'block'
+      errorMessage.textContent = 'Không thể tải dữ liệu khách hàng!'
     }
   }
-};
+}
 
 onMounted(() => {
-  loadUsers();
-});
+  loadUsers()
+})
 
 const updateStatus = async (userId, newStatus) => {
   try {
@@ -47,21 +47,21 @@ const updateStatus = async (userId, newStatus) => {
       newStatus,
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      }
-    );
-    console.log("Trạng thái đã được cập nhật");
-    alert("Cập nhật trạng thái thành công!");
+      },
+    )
+    console.log('Trạng thái đã được cập nhật')
+    alert('Cập nhật trạng thái thành công!')
   } catch (error) {
-    console.error("Lỗi khi cập nhật trạng thái:", error);
-    const errorMessage = document.getElementById("error-message");
+    console.error('Lỗi khi cập nhật trạng thái:', error)
+    const errorMessage = document.getElementById('error-message')
     if (errorMessage) {
-      errorMessage.style.display = "block";
-      errorMessage.textContent = "Không thể cập nhật trạng thái!";
+      errorMessage.style.display = 'block'
+      errorMessage.textContent = 'Không thể cập nhật trạng thái!'
     }
   }
-};
+}
 </script>
 <template>
   <div class="container mt-4">
@@ -75,6 +75,7 @@ const updateStatus = async (userId, newStatus) => {
           <tr>
             <th>ID</th>
             <th>Tên</th>
+            <th>Avatar</th>
             <th>Email</th>
             <th>Trạng thái</th>
             <th>Hành động</th>
@@ -85,6 +86,19 @@ const updateStatus = async (userId, newStatus) => {
           <tr v-for="user in users" :key="user.id">
             <td>{{ user.id }}</td>
             <td>{{ user.name }}</td>
+            <td>
+              <img
+                :src="
+                  user.avatar
+                    ? `http://localhost:8080/images/${user.avatar}`
+                    : '/default-avatar.png'
+                "
+                alt="avatar"
+                width="40"
+                height="40"
+              />
+            </td>
+
             <td>{{ user.email }}</td>
             <td>
               <select

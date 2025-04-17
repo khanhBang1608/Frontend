@@ -121,10 +121,9 @@ const router = createRouter({
       component: ManageUserView,
     },
     {
-      path: '/admin/address',
+      path: '/admin/address/list',
       name: 'address',
       component: ManageAddressView,
-      props: (route) => ({ userId: route.query.userId })
     },
     {
       path: '/admin/order',
