@@ -19,22 +19,38 @@ const login = async () => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      withCredentials: true, // thêm dòng này để cookie gửi kèm
+      withCredentials: true,
     })
 
-    const { token, user } = response.data
-    localStorage.setItem('token', token)
+    // Kiểm tra xem response.data.user có tồn tại không
+    if (response.data && response.data.user) {
+      const user = response.data.user
+      const role = user.role // 0 = admin, 1 = user
 
-    // Lưu thông tin người dùng vào cookie
-    document.cookie = `userId=${user.id}; path=/`
-    document.cookie = `userRole=${user.role}; path=/`
-    document.cookie = `userName=${user.name}; path=/`
-    document.cookie = `userEmail=${user.email}; path=/`
-    document.cookie = `userAvatar=${user.avatar}; path=/`
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('role', role)
 
-    router.push('/')
+      // Lưu thông tin người dùng vào cookie
+      document.cookie = `userId=${user.id}; path=/`
+      document.cookie = `userRole=${user.role}; path=/`
+      document.cookie = `userName=${user.name}; path=/`
+      document.cookie = `userEmail=${user.email}; path=/`
+      document.cookie = `userAvatar=${user.avatar}; path=/`
+
+      // Phân quyền điều hướng
+      if (role === 0) {
+        router.push('/admin')
+      } else {
+        router.push('/')
+      }
+    } else {
+      // Nếu không có user, hiển thị lỗi
+      throw new Error('Không tìm thấy thông tin người dùng')
+    }
   } catch (err) {
-    error.value = err.response?.data || 'Lỗi hệ thống'
+    // Log chi tiết lỗi để dễ dàng xem
+    console.log('Error during login:', err)
+    error.value = err.response?.data?.message || 'Lỗi hệ thống'
   }
 }
 </script>
