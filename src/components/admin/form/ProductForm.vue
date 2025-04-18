@@ -65,13 +65,13 @@ const handleSubmit = async () => {
 
   try {
     if (productId) {
-      await axios.post(`http://localhost:8080/api/admin/product/update/${productId}`, formData, {
+      await axios.post(`http://localhost:8080/api/product/update/${productId}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       alert('Cập nhật thành công')
       router.push('/admin/product')
     } else {
-      await axios.post('http://localhost:8080/api/admin/product/add', formData, {
+      await axios.post('http://localhost:8080/api/product/add', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       alert('Thêm thành công')

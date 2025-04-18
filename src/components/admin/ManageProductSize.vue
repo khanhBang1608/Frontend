@@ -7,18 +7,16 @@ import * as bootstrap from 'bootstrap'
 const sizes = ref([])
 const productName = ref('')
 
-const editStock = ref(0)            
-const editingId = ref(null)          
-let modalInstance = null 
-
+const editStock = ref(0)
+const editingId = ref(null)
+let modalInstance = null
 
 const route = useRoute()
 const productId = Number(route.query.productId)
 
-
 const loadSizes = async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/admin/product/sizes?productId=${productId}`)
+    const res = await axios.get(`http://localhost:8080/api/product/sizes?productId=${productId}`)
     sizes.value = res.data
   } catch (err) {
     console.error('Lỗi tải size:', err)
@@ -27,7 +25,7 @@ const loadSizes = async () => {
 
 const loadProductName = async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/admin/product/${productId}`)
+    const res = await axios.get(`http://localhost:8080/api/product/${productId}`)
     productName.value = res.data.name
   } catch (err) {
     console.error('Không thể tải tên sản phẩm:', err)
@@ -38,8 +36,8 @@ const deleteProductSize = async (id) => {
 
   try {
     await axios.post(`http://localhost:8080/api/product/productSize/delete?id=${id}`)
-    sizes.value = sizes.value.filter(item => item.id !== id)
-    alert("xóa thành công")
+    sizes.value = sizes.value.filter((item) => item.id !== id)
+    alert('xóa thành công')
   } catch (err) {
     console.error('Lỗi khi xóa:', err)
     const errorBox = document.getElementById('error-message')
@@ -47,7 +45,6 @@ const deleteProductSize = async (id) => {
     errorBox.style.display = 'block'
   }
 }
-
 
 const openEditModal = async (item) => {
   editStock.value = item.stock
@@ -63,12 +60,11 @@ const openEditModal = async (item) => {
   }
 }
 
-
 const confirmEdit = async () => {
   try {
-    await axios.post('http://localhost:8080/api/admin/product/productSize/update', {
+    await axios.post('http://localhost:8080/api/product/productSize/update', {
       id: editingId.value,
-      stock: editStock.value
+      stock: editStock.value,
     })
     await loadSizes()
     modalInstance.hide()
@@ -79,7 +75,6 @@ const confirmEdit = async () => {
   }
 }
 
-
 onMounted(() => {
   loadProductName()
   loadSizes()
@@ -88,14 +83,16 @@ onMounted(() => {
 
 <template>
   <div class="container mt-4">
-    <h3 class="text-center">DANH SÁCH SIZE CỦA SẢN PHẨM: <strong>{{ productName }}</strong></h3>
+    <h3 class="text-center">
+      DANH SÁCH SIZE CỦA SẢN PHẨM: <strong>{{ productName }}</strong>
+    </h3>
     <hr />
     <div class="alert alert-danger" style="display: none" id="error-message"></div>
     <div class="d-flex justify-content-between mb-3">
       <a href="/admin/product" class="btn btn-secondary">Quay lại</a>
-        <a :href="`/admin/product/productSizeForm?productId=${productId}`" class="btn btn-primary ">
-                Thêm size
-              </a>
+      <a :href="`/admin/product/productSizeForm?productId=${productId}`" class="btn btn-primary">
+        Thêm size
+      </a>
     </div>
     <table class="table table-bordered table-hover">
       <thead class="table-dark">
@@ -108,7 +105,7 @@ onMounted(() => {
       </thead>
       <tbody>
         <tr v-if="sizes.length === 0">
-            <td colspan="3" class="text-center">Không có size nào</td>
+          <td colspan="3" class="text-center">Không có size nào</td>
         </tr>
         <tr v-for="item in sizes" :key="item.id">
           <td>{{ item.id }}</td>
@@ -123,25 +120,34 @@ onMounted(() => {
     </table>
   </div>
 
-
   <!-- Modal Sửa Số Lượng -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Chỉnh sửa số lượng</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-      </div>
-      <div class="modal-body">
-        <label>Số lượng mới:</label>
-        <input type="number" class="form-control" v-model="editStock" min="0" />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-        <button type="button" class="btn btn-primary" @click="confirmEdit">Lưu thay đổi</button>
+  <div
+    class="modal fade"
+    id="editModal"
+    tabindex="-1"
+    aria-labelledby="editModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Chỉnh sửa số lượng</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Đóng"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <label>Số lượng mới:</label>
+          <input type="number" class="form-control" v-model="editStock" min="0" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary" @click="confirmEdit">Lưu thay đổi</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 </template>

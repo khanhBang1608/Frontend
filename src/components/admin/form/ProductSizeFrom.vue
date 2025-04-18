@@ -13,20 +13,20 @@ const quantities = ref({})
 const productName = ref('')
 
 const loadSizes = async () => {
-  const res = await axios.get('http://localhost:8080/api/admin/product/size')
+  const res = await axios.get('http://localhost:8080/api/product/size')
   allSizes.value = res.data
 }
 
 const loadProductName = async () => {
-  const res = await axios.get(`http://localhost:8080/api/admin/product/${productId}`)
+  const res = await axios.get(`http://localhost:8080/api/product/${productId}`)
   productName.value = res.data.name
 }
 
 const submitSizes = async () => {
-  const dataToSend = selectedSizeIds.value.map(sizeId => ({
+  const dataToSend = selectedSizeIds.value.map((sizeId) => ({
     productId,
     sizeId,
-    stock: quantities.value[sizeId] || 0
+    stock: quantities.value[sizeId] || 0,
   }))
 
   if (dataToSend.length === 0) {
@@ -35,7 +35,7 @@ const submitSizes = async () => {
   }
 
   try {
-    await axios.post('http://localhost:8080/api/admin/product/productSize/add', dataToSend)
+    await axios.post('http://localhost:8080/api/product/productSize/add', dataToSend)
     alert('Thêm size thành công!')
     router.push(`/admin/product/sizes?productId=${productId}`)
   } catch (err) {
@@ -52,7 +52,9 @@ onMounted(() => {
 
 <template>
   <div class="container mt-4">
-    <h3 class="text-center">THÊM SIZE CHO SẢN PHẨM: <strong>{{ productName }}</strong></h3>
+    <h3 class="text-center">
+      THÊM SIZE CHO SẢN PHẨM: <strong>{{ productName }}</strong>
+    </h3>
     <hr />
 
     <!-- Select chọn nhiều size -->
@@ -70,7 +72,7 @@ onMounted(() => {
       <div class="col-md-4 mb-3" v-for="sizeId in selectedSizeIds" :key="sizeId">
         <label class="form-label">
           Nhập số lượng cho size:
-          <strong>{{ allSizes.find(s => s.id === sizeId)?.name }}</strong>
+          <strong>{{ allSizes.find((s) => s.id === sizeId)?.name }}</strong>
         </label>
         <input
           type="number"
