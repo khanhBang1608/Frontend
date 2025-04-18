@@ -176,14 +176,14 @@ const routes = [
 ]
 
 // Gán meta.allowedRoles tự động cho các route có tiền tố
-routes.forEach((route) => {
-  if (route.path.startsWith('/admin')) {
-    route.meta = { allowedRoles: [0] } // chỉ admin (role = 0)
-  }
-  if (route.path.startsWith('/user')) {
-    route.meta = { allowedRoles: [1] } // chỉ user (role = 1)
-  }
-})
+// routes.forEach((route) => {
+//   if (route.path.startsWith('/admin')) {
+//     route.meta = { allowedRoles: [0] } // chỉ admin (role = 0)
+//   }
+//   if (route.path.startsWith('/user')) {
+//     route.meta = { allowedRoles: [1] } // chỉ user (role = 1)
+//   }
+// })
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -191,24 +191,24 @@ const router = createRouter({
 })
 
 // Middleware kiểm tra role trước khi vào route
-router.beforeEach((to, from, next) => {
-  const allowedRoles = to.meta.allowedRoles
+// router.beforeEach((to, from, next) => {
+//   const allowedRoles = to.meta.allowedRoles
 
-  if (!allowedRoles) {
-    return next()
-  }
+//   if (!allowedRoles) {
+//     return next()
+//   }
 
-  const role = parseInt(localStorage.getItem('role'))
+//   const role = parseInt(localStorage.getItem('role'))
 
-  if (isNaN(role)) {
-    return next('/login')
-  }
+//   if (isNaN(role)) {
+//     return next('/login')
+//   }
 
-  if (!allowedRoles.includes(role)) {
-    return next('/login')
-  }
+//   if (!allowedRoles.includes(role)) {
+//     return next('/login')
+//   }
 
-  next()
-})
+//   next()
+// })
 
 export default router
