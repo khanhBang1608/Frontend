@@ -69,6 +69,7 @@ async function fetchCart() {
   try {
     const response = await cartAPI.viewCart(cartId)
     cart.value = response.data
+    console.log(cart.value)
   } catch (error) {
     console.error('Lỗi lấy giỏ hàng:', error)
   }
@@ -126,7 +127,11 @@ onMounted(() => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in cart" :key="item.id" class="cart-item-row-modern">
+          <tr
+            v-for="item in cart.filter((item) => item?.product?.status === true && item?.category?.status === true)"
+            :key="item.id"
+            class="cart-item-row-modern"
+          >
             <td class="text-center">
               <img
                 :src="'http://localhost:8080/images/' + item.product.imageNames[0]"
@@ -147,7 +152,7 @@ onMounted(() => {
               />
             </td>
             <td class="cart-price-highlight-modern">
-              {{ (item.product.price * item.quantity).toLocaleString('vi-VN') }}₫
+              {{ (item.product.price * item.quantity).toLocaleString('vi-VN') }} VND
             </td>
             <td class="text-center">
               <button
@@ -162,13 +167,15 @@ onMounted(() => {
       </table>
 
       <div class="text-end cart-total-price-modern">
-        Tổng tiền:
-        {{
-          cart
-            .reduce((total, item) => total + item.product.price * item.quantity, 0)
-            .toLocaleString('vi-VN')
-        }}₫
-      </div>
+  Tổng tiền:
+  {{
+    cart
+      .filter((item) => item?.product?.status === true && item?.category?.status === true) // Lọc sản phẩm có status true
+      .reduce((total, item) => total + item.product.price * item.quantity, 0) // Tính tổng tiền
+      .toLocaleString('vi-VN')
+  }} VND
+</div>
+
 
       <div class="text-end">
         <button class="cart-clear-btn-modern" @click="clearCart">Xoá tất cả</button>
