@@ -192,10 +192,10 @@ onMounted(() => {
           </li>
         </ul>
         <div class="mb-3">
-      <router-link to="/user/address/form" class="btn btn-primary">
-        <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
-      </router-link>
-    </div>
+          <router-link to="/user/address/form" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
+          </router-link>
+        </div>
         <div class="text-end mt-3">
           <button @click="placeOrder" class="btn btn-primary">Xác nhận đặt hàng</button>
           <button @click="showAddressList = false" class="btn btn-secondary">Huỷ</button>
