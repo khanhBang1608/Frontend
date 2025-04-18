@@ -1,14 +1,68 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import cartAPI from '@/assets/js/cartAPI'
+import axios from 'axios'
 
 const cart = ref([])
-
 const cartId = getCookie('userId')
 function getCookie(name) {
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${name}=`)
   if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+const showAddressList = ref(false)
+const selectedAddressId = ref(null)
+
+const userId = document.cookie
+  .split('; ')
+  .find((row) => row.startsWith('userId'))
+  ?.split('=')[1]
+
+const addresses = ref([])
+
+async function fetchAddresses() {
+  try {
+    const response = await axios.get(`http://localhost:8080/api/addresses/user/${userId}`)
+    addresses.value = response.data
+
+    // Chọn mặc định địa chỉ đầu tiên nếu có
+    if (addresses.value.length > 0) {
+      selectedAddressId.value = addresses.value[0].id
+    }
+  } catch (error) {
+    console.error('Lỗi khi lấy địa chỉ:', error)
+  }
+}
+
+function openAddressList() {
+  showAddressList.value = true
+  fetchAddresses()
+}
+
+async function placeOrder() {
+  if (!selectedAddressId.value) {
+    alert('Vui lòng chọn địa chỉ!')
+    return
+  }
+
+  try {
+    const response = await axios.post(`http://localhost:8080/api/orders/create`, {
+      userId: cartId,
+      addressId: selectedAddressId.value,
+      items: cart.value.map((item) => ({
+        productSizeId: item.productSize.id,
+        quantity: item.quantity,
+      })),
+    })
+
+    alert('Đặt hàng thành công!')
+    showAddressList.value = false
+    fetchCart()
+  } catch (error) {
+    console.error('Lỗi đặt hàng:', error)
+    alert('Đặt hàng thất bại!')
+  }
 }
 
 async function fetchCart() {
@@ -51,6 +105,7 @@ onMounted(() => {
   fetchCart()
 })
 </script>
+
 <template>
   <div class="cart-container-modern">
     <h2 class="cart-title-modern">Giỏ hàng của bạn</h2>
@@ -117,6 +172,34 @@ onMounted(() => {
 
       <div class="text-end">
         <button class="cart-clear-btn-modern" @click="clearCart">Xoá tất cả</button>
+      </div>
+      <!-- Nút Mua ngay -->
+      <!-- Nút Mua ngay -->
+      <div class="text-end mt-3">
+        <button class="btn btn-success" @click="openAddressList">Mua ngay</button>
+      </div>
+
+      <!-- Component hiển thị danh sách địa chỉ -->
+      <div v-if="showAddressList" class="address-section mt-4 p-3 border rounded">
+        <h3 class="mb-3">Chọn địa chỉ giao hàng</h3>
+        <div v-if="addresses.length === 0">Không có địa chỉ nào!</div>
+        <ul v-else class="list-unstyled">
+          <li v-for="addr in addresses" :key="addr.id" class="mb-2">
+            <label>
+              <input type="radio" :value="addr.id" v-model="selectedAddressId" />
+              {{ addr.customerName }} - {{ addr.phone }} - {{ addr.address }}
+            </label>
+          </li>
+        </ul>
+        <div class="mb-3">
+      <router-link to="/user/address/form" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Thêm Địa Chỉ
+      </router-link>
+    </div>
+        <div class="text-end mt-3">
+          <button @click="placeOrder" class="btn btn-primary">Xác nhận đặt hàng</button>
+          <button @click="showAddressList = false" class="btn btn-secondary">Huỷ</button>
+        </div>
       </div>
     </div>
   </div>
