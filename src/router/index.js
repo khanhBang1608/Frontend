@@ -168,6 +168,11 @@ const routes = [
     name: 'about',
     component: () => import('../views/AboutView.vue'),
   },
+  {
+    path: '/user/cart',
+    name: 'cart',
+    component: () => import('../views/CartView.vue'),
+  },
 ]
 
 // Gán meta.allowedRoles tự động cho các route có tiền tố
