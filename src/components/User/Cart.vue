@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import cartAPI from '@/assets/js/cartAPI'
 import axios from 'axios'
 
@@ -10,6 +10,10 @@ function getCookie(name) {
   const parts = value.split(`; ${name}=`)
   if (parts.length === 2) return parts.pop().split(';').shift()
 }
+
+const filteredCart = computed(() =>
+  cart.value.filter((item) => item?.product?.status === true && item?.category?.status === true),
+)
 
 const showAddressList = ref(false)
 const selectedAddressId = ref(null)
@@ -127,11 +131,7 @@ onMounted(() => {
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="item in cart.filter((item) => item?.product?.status === true && item?.category?.status === true)"
-            :key="item.id"
-            class="cart-item-row-modern"
-          >
+          <tr v-for="item in filteredCart" :key="item.id" class="cart-item-row-modern">
             <td class="text-center">
               <img
                 :src="'http://localhost:8080/images/' + item.product.imageNames[0]"
@@ -167,15 +167,14 @@ onMounted(() => {
       </table>
 
       <div class="text-end cart-total-price-modern">
-  Tổng tiền:
-  {{
-    cart
-      .filter((item) => item?.product?.status === true && item?.category?.status === true) // Lọc sản phẩm có status true
-      .reduce((total, item) => total + item.product.price * item.quantity, 0) // Tính tổng tiền
-      .toLocaleString('vi-VN')
-  }} VND
-</div>
-
+        Tổng tiền:
+        {{
+          filteredCart
+            .reduce((total, item) => total + item.product.price * item.quantity, 0)
+            .toLocaleString('vi-VN')
+        }}
+        VND
+      </div>
 
       <div class="text-end">
         <button class="cart-clear-btn-modern" @click="clearCart">Xoá tất cả</button>
