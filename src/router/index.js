@@ -16,6 +16,7 @@ import ManageOderDetailView from '@/views/ManageOderDetailView.vue'
 import ProductFormView from '@/views/ProductFormView.vue'
 import ManageDashboardView from '@/views/ManageDashboardView.vue'
 import OrderHistoryView from '@/views/OrderHistoryView.vue'
+import MyOrderDetailView from '@/views/MyOrderDetailView.vue'
 import FavoriteView from '@/views/FavoriteView.vue'
 import VerifyOtpView from '@/views/VerifyOtpView.vue'
 import ProductView from '@/views/ProductView.vue'
@@ -82,6 +83,11 @@ const routes = [
     path: '/user/order/history',
     name: 'OrderHistoryView',
     component: OrderHistoryView,
+  },
+  {
+    path: '/user/order/details',
+    name: 'MyOrderDetailView',
+    component: MyOrderDetailView,
   },
   {
     path: '/user/favorite',
