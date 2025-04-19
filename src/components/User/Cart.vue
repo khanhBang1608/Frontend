@@ -5,80 +5,37 @@ import axios from 'axios'
 
 const cart = ref([])
 const cartId = getCookie('userId')
+
 function getCookie(name) {
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${name}=`)
   if (parts.length === 2) return parts.pop().split(';').shift()
 }
 
+// Danh sách địa chỉ
+const addresses = ref([])
+
+// Trạng thái chọn địa chỉ
+const selectedAddressId = ref(null)
+const showAddressList = ref(false)
+const isPlacingOrder = ref(false)
+
+// Lọc sản phẩm trong cart hợp lệ
 const filteredCart = computed(() =>
   cart.value.filter((item) => item?.product?.status === true && item?.category?.status === true),
 )
 
-const showAddressList = ref(false)
-const selectedAddressId = ref(null)
-
-const userId = document.cookie
-  .split('; ')
-  .find((row) => row.startsWith('userId'))
-  ?.split('=')[1]
-
-const addresses = ref([])
-
-async function fetchAddresses() {
-  try {
-    const response = await axios.get(`http://localhost:8080/api/addresses/user/${userId}`)
-    addresses.value = response.data
-
-    // Chọn mặc định địa chỉ đầu tiên nếu có
-    if (addresses.value.length > 0) {
-      selectedAddressId.value = addresses.value[0].id
-    }
-  } catch (error) {
-    console.error('Lỗi khi lấy địa chỉ:', error)
-  }
-}
-
-function openAddressList() {
-  showAddressList.value = true
-  fetchAddresses()
-}
-
-async function placeOrder() {
-  if (!selectedAddressId.value) {
-    alert('Vui lòng chọn địa chỉ!')
-    return
-  }
-
-  try {
-    const response = await axios.post(`http://localhost:8080/api/orders/create`, {
-      userId: cartId,
-      addressId: selectedAddressId.value,
-      items: cart.value.map((item) => ({
-        productSizeId: item.productSize.id,
-        quantity: item.quantity,
-      })),
-    })
-
-    alert('Đặt hàng thành công!')
-    showAddressList.value = false
-    fetchCart()
-  } catch (error) {
-    console.error('Lỗi đặt hàng:', error)
-    alert('Đặt hàng thất bại!')
-  }
-}
-
+// Gọi API lấy giỏ hàng
 async function fetchCart() {
   try {
     const response = await cartAPI.viewCart(cartId)
     cart.value = response.data
-    console.log(cart.value)
   } catch (error) {
     console.error('Lỗi lấy giỏ hàng:', error)
   }
 }
 
+// Gọi API xóa sản phẩm khỏi giỏ
 async function handleRemoveFromCart(productSizeId) {
   try {
     await cartAPI.deleteItem(cartId, productSizeId)
@@ -88,6 +45,7 @@ async function handleRemoveFromCart(productSizeId) {
   }
 }
 
+// Gọi API cập nhật số lượng
 async function updateQuantity(item) {
   try {
     await cartAPI.updateQuantity(cartId, item.productSize.id, item.quantity)
@@ -97,6 +55,7 @@ async function updateQuantity(item) {
   }
 }
 
+// Gọi API xóa toàn bộ
 async function clearCart() {
   try {
     await cartAPI.clearCart(cartId)
@@ -106,10 +65,68 @@ async function clearCart() {
   }
 }
 
+// Gọi API lấy địa chỉ của người dùng
+async function fetchAddresses() {
+  try {
+    const response = await axios.get(`http://localhost:8080/api/addresses/user/${cartId}`)
+    addresses.value = response.data
+
+    if (addresses.value.length > 0) {
+      const defaultAddr = addresses.value.find((addr) => addr.isDefault)
+      selectedAddressId.value = defaultAddr ? defaultAddr.id : addresses.value[0].id
+    }
+  } catch (error) {
+    console.error('Lỗi khi lấy địa chỉ:', error)
+  }
+}
+
+// Mở form chọn địa chỉ
+function openAddressList() {
+  showAddressList.value = true
+  fetchAddresses()
+}
+
+// Gửi đơn hàng
+async function placeOrder() {
+  if (!selectedAddressId.value) {
+    alert('Vui lòng chọn địa chỉ!')
+    return
+  }
+
+  const selectedAddress = addresses.value.find((addr) => addr.id === selectedAddressId.value)
+  if (!selectedAddress) {
+    alert('Không tìm thấy địa chỉ!')
+    return
+  }
+
+  isPlacingOrder.value = true
+  try {
+    const response = await axios.post(`http://localhost:8080/api/user/order/checkout`, {
+      userId: cartId,
+      address: `${selectedAddress.address}, ${selectedAddress.customerName}, ${selectedAddress.phone}`,
+      items: filteredCart.value.map((item) => ({
+        productSizeId: item.productSize.id,
+        quantity: item.quantity,
+      })),
+    })
+
+    alert('Đặt hàng thành công!')
+    showAddressList.value = false
+    clearCart()
+    fetchCart()
+  } catch (error) {
+    console.error('Lỗi đặt hàng:', error)
+    alert('Đặt hàng thất bại!')
+  } finally {
+    isPlacingOrder.value = false
+  }
+}
+
 onMounted(() => {
   fetchCart()
 })
 </script>
+t>
 
 <template>
   <div class="cart-container-modern">
@@ -203,7 +220,9 @@ onMounted(() => {
           </router-link>
         </div>
         <div class="text-end mt-3">
-          <button @click="placeOrder" class="btn btn-primary">Xác nhận đặt hàng</button>
+          <button :disabled="isPlacingOrder" @click="placeOrder" class="btn btn-primary">
+            {{ isPlacingOrder ? 'Đang đặt...' : 'Xác nhận đặt hàng' }}
+          </button>
           <button @click="showAddressList = false" class="btn btn-secondary">Huỷ</button>
         </div>
       </div>
