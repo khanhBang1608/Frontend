@@ -28,6 +28,7 @@ const login = async () => {
 
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('role', role)
+      localStorage.setItem('userId', user.id)
 
       // Lưu thông tin người dùng vào cookie
       document.cookie = `userId=${user.id}; path=/`

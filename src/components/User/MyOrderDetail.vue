@@ -8,24 +8,38 @@ const orderId = ref(route.query.orderId)
 const orderDetail = ref({})
 const loading = ref(true)
 
-
-const token = localStorage.getItem('token');
-
+const token = localStorage.getItem('token')
 
 const formatPrice = (value) => {
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'decimal',
-  }).format(value) + ' VND'
+  return (
+    new Intl.NumberFormat('vi-VN', {
+      style: 'decimal',
+    }).format(value) + ' VND'
+  )
+}
+const formatDateTime = (dateStr) => {
+  if (!dateStr) return ''
+  return new Date(dateStr).toLocaleString('vi-VN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  })
 }
 
 onMounted(async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/user/order/detail?orderId=${orderId.value}`,{
-      headers: {
-        Authorization: `Bearer ${token}`,
-        
+    const res = await axios.get(
+      `http://localhost:8080/api/user/order/detail?orderId=${orderId.value}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    })
+    )
     console.log('Order detail response:', res.data)
     orderDetail.value = res.data
   } catch (error) {
@@ -44,7 +58,7 @@ onMounted(async () => {
       <h5>Thông tin đơn hàng</h5>
       <p><strong>ID Đơn Hàng:</strong> {{ orderDetail.orderId }}</p>
       <p><strong>Khách Hàng:</strong> {{ orderDetail.fullName }}</p>
-      <p><strong>Ngày Tạo:</strong> {{ new Date(orderDetail.orderDate).toLocaleString() }}</p>
+      <p><strong>Ngày Tạo:</strong> {{ formatDateTime(orderDetail.orderDate) }}</p>
       <p><strong>Địa chỉ:</strong> {{ orderDetail.address }}</p>
       <p>
         <strong>Trạng Thái:</strong>
@@ -58,7 +72,10 @@ onMounted(async () => {
     </div>
 
     <h5 class="mb-3">Danh Sách Sản Phẩm</h5>
-    <table class="table table-striped table-bordered table-hover" v-if="orderDetail.items && orderDetail.items.length">
+    <table
+      class="table table-striped table-bordered table-hover"
+      v-if="orderDetail.items && orderDetail.items.length"
+    >
       <thead class="table-dark">
         <tr>
           <th>Tên Sản Phẩm</th>

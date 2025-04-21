@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const favorites = ref([])
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('token')
 
 // Lấy userId từ cookie
 const getCookie = (name) => {
@@ -15,7 +15,8 @@ const getCookie = (name) => {
 
 // Lấy danh sách yêu thích của user
 const getFavorites = async () => {
-  const userId = getCookie('userId') // Lấy userId từ cookie
+  const userId = parseInt(localStorage.getItem('userId'))
+  // const userId = getCookie('userId') // Lấy userId từ cookie
   console.log('UserId:', userId) // Kiểm tra giá trị userId
 
   if (!userId) {
@@ -24,7 +25,7 @@ const getFavorites = async () => {
   }
 
   try {
-    const response = await axios.get(`http://localhost:8080/api/user/favorites/${userId}`,{
+    const response = await axios.get(`http://localhost:8080/api/user/favorites/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,7 +44,8 @@ onMounted(() => {
 
 // Hàm để xóa sản phẩm yêu thích
 const removeFavorite = async (productId) => {
-  const userId = getCookie('userId')
+  const userId = parseInt(localStorage.getItem('userId'))
+  // const userId = getCookie('userId')
   if (!userId) {
     console.log('Không tìm thấy userId trong cookie')
     return
@@ -51,7 +53,7 @@ const removeFavorite = async (productId) => {
 
   try {
     // Gọi API xóa sản phẩm yêu thích
-    await axios.delete(`http://localhost:8080/api/user/favorites/${userId}/${productId}`,{
+    await axios.delete(`http://localhost:8080/api/user/favorites/${userId}/${productId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

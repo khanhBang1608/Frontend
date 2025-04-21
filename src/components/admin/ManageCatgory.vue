@@ -2,8 +2,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 import axios from 'axios'
 
-const token = localStorage.getItem('token');
-
+const token = localStorage.getItem('token')
 
 const form = ref({
   id: null,
@@ -21,10 +20,11 @@ const fetchCategories = async () => {
     $('#categoryTable').DataTable().destroy()
   }
 
-  const res = await axios.get('http://localhost:8080/api/admin/category/list',{
+  const res = await axios.get('http://localhost:8080/api/admin/category/list', {
     headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      Authorization: `Bearer ${token}`,
+      withCredentials: true,
+    },
   })
   categories.value = res.data
   await nextTick()
@@ -62,11 +62,16 @@ const handleSubmit = async () => {
 
 const handleUpdate = async (categoryData) => {
   try {
-    await axios.post(`http://localhost:8080/api/admin/category/update/${form.value.id}`, categoryData,{
-      headers: {
-        Authorization: `Bearer ${token}`,
+    await axios.post(
+      `http://localhost:8080/api/admin/category/update/${form.value.id}`,
+      categoryData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          withCredentials: true,
+        },
       },
-    })
+    )
     alert('Danh mục đã được cập nhật thành công')
     resetForm()
     isFormVisible.value = false
@@ -82,7 +87,7 @@ const handleUpdate = async (categoryData) => {
 
 const handleAdd = async (categoryData) => {
   try {
-    await axios.post('http://localhost:8080/api/admin/category/add', categoryData,{
+    await axios.post('http://localhost:8080/api/admin/category/add', categoryData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

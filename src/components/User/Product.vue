@@ -8,7 +8,8 @@ const getUserIdFromCookie = () => {
   return match ? parseInt(match[1]) : null
 }
 
-const userId = getUserIdFromCookie()
+// const userId = getUserIdFromCookie()
+const userId = parseInt(localStorage.getItem('userId'))
 
 const products = ref([])
 const favorites = ref([]) // Danh sách productId yêu thích
@@ -26,14 +27,14 @@ const fetchCategories = async () => {
   const res = await axios.get('http://localhost:8080/api/categories')
   categories.value = res.data
 }
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('token')
 // Lấy danh sách yêu thích từ backend
 const fetchFavorites = async () => {
   if (!userId) return
-  const res = await axios.get(`http://localhost:8080/api/user/favorites/${userId}`,{
+  const res = await axios.get(`http://localhost:8080/api/user/favorites/${userId}`, {
     headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      Authorization: `Bearer ${token}`,
+    },
   })
   favorites.value = res.data.map((fav) => fav.productId)
 }
@@ -43,18 +44,18 @@ const isFavorite = (productId) => favorites.value.includes(productId)
 const addToFavorites = async (productId) => {
   await axios.post('http://localhost:8080/api/user/favorites/favorites', null, {
     headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      Authorization: `Bearer ${token}`,
+    },
     params: { userId, productId },
   })
   favorites.value.push(productId)
 }
 
 const removeFromFavorites = async (productId) => {
-  await axios.delete(`http://localhost:8080/api/user/favorites/${userId}/${productId}`,{
+  await axios.delete(`http://localhost:8080/api/user/favorites/${userId}/${productId}`, {
     headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      Authorization: `Bearer ${token}`,
+    },
   })
   favorites.value = favorites.value.filter((id) => id !== productId)
 }
