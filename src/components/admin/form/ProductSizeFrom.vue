@@ -17,7 +17,7 @@ const loadSizes = async () => {
   const res = await axios.get('http://localhost:8080/api/admin/product/size', {
     headers: {
     Authorization: `Bearer ${token}`,
-    withCredentials: true 
+    // withCredentials: true 
   },
   
 });

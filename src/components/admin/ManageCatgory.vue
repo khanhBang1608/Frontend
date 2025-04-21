@@ -23,7 +23,7 @@ const fetchCategories = async () => {
   const res = await axios.get('http://localhost:8080/api/admin/category/list', {
     headers: {
       Authorization: `Bearer ${token}`,
-      withCredentials: true,
+      // withCredentials: true,
     },
   })
   categories.value = res.data
@@ -68,7 +68,7 @@ const handleUpdate = async (categoryData) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          withCredentials: true,
+          // withCredentials: true,
         },
       },
     )

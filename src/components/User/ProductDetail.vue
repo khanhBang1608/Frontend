@@ -78,7 +78,7 @@ const addToCart = async () => {
       },
       headers: {
         Authorization: `Bearer ${token}`,
-        withCredentials: true,
+        // withCredentials: true,
       },
     })
 
@@ -112,7 +112,7 @@ function getCookie(name) {
 
       <div class="col-md-6 product-info">
         <h2>{{ product.name }}</h2>
-        <p class="price text-danger">{{ product.price.toLocaleString() }} VND</p>
+		<p class="price text-danger">{{ product.price.toLocaleString() }} VND</p>
         <p class="text-dark">{{ product.description }}</p>
         <p class="text-muted">Bạn cần tìm size/màu khác? Liên hệ Bele ngay nhé!</p>
 

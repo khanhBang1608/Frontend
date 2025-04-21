@@ -7,6 +7,7 @@ const route = useRoute()
 const orderId = ref(route.query.orderId)
 const orderDetail = ref({})
 const loading = ref(true)
+const token = localStorage.getItem('token')
 
 const formatPrice = (value) => {
   return new Intl.NumberFormat('vi-VN', {
@@ -17,7 +18,14 @@ const formatPrice = (value) => {
 
 onMounted(async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/order/detail?orderId=${orderId.value}`)
+    const res = await axios.get(`http://localhost:8080/api/admin/order/detail?orderId=${orderId.value}`,
+      {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            // withCredentials: true,
+          },
+      }
+    )
     console.log('Order detail response:', res.data) // Log dữ liệu để kiểm tra
     orderDetail.value = res.data
   } catch (error) {

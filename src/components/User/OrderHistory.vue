@@ -31,7 +31,7 @@ export default {
         .get(`http://localhost:8080/api/user/order/list?userId=${2}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            withCredentials: true,
+            // withCredentials: true,
           },
         })
         .then((res) => {

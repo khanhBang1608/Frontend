@@ -14,7 +14,7 @@ const fetchAddresses = async () => {
     const response = await axios.get(`http://localhost:8080/api/admin/addresses/${userId.value}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        withCredentials: true,
+        // withCredentials: true,
       },
     })
     addresses.value = response.data

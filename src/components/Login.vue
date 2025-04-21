@@ -16,7 +16,9 @@ const login = async () => {
     formData.append('password', password.value)
 
     const response = await axios.post('http://localhost:8080/api/login', formData, {
-      headers: {},
+      headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
       data: formData,
       withCredentials: true,
     })
