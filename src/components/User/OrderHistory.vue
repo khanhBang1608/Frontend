@@ -25,14 +25,13 @@ export default {
         return;
       }
 
-      axios
-        .get('http://localhost:8080/api/user/order/list', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            
-          },
-          withCredentials: true,
-        })
+      axios.get(`http://localhost:8080/api/user/order/list?userId=${userId}`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+  // withCredentials: true,
+})
+
         .then((res) => {
           this.orders = res.data;
         })
@@ -70,17 +69,17 @@ export default {
     confirmCancel(orderId) {
       if (confirm('Bạn có chắc muốn hủy đơn hàng này không?')) {
         axios
-          .post(`http://localhost:8080/api/user/order/update-status/${orderId}`, 
+          .post(`http://localhost:8080/api/user/order/update-status/${orderId}`,
           {
             status: 4,
           },
           {
             headers: {
               Authorization: `Bearer ${token}`,
-            
+
             },
           }
-          
+
           )
           .then(() => {
             this.loadOrders();
